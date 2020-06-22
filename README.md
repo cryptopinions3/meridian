@@ -1,0 +1,2 @@
+# meridian
+staking deflationary token
