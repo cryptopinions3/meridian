@@ -1,0 +1,98 @@
+// Global variables
+//
+// Base font styles for headings and links.
+
+// For headers
+$headings: (
+  'sizes': (
+    'h1-font-size': 48px,
+    'h2-font-size': 60px,
+    'h3-font-size': 24px,
+    'h4-font-size': 21px,
+    'h5-font-size': 17px,
+    'h6-font-size': 15px
+  ),
+  'fonts': (
+    'headings-font-family': inherit,
+    'headings-color': inherit
+  )
+);
+
+// Global vars for body typography
+$base: (
+  'base-font-sans-serif': unquote("Montserrat, sans-serif"),
+  'base-font-serif': unquote("'Montserrat',  serif"),
+  'base-font-family': unquote("Montserrat,  sans-serif"),
+  'base-text-color': #000,
+  'base-font-size': 16px,
+  'base-line-height': 1.2,
+  'base-background-color': #fff,
+  'base-link-color':#39f,
+  'base-min-width': 320px,
+  'base-transition': all 0.3s ease,
+  'base-border-radius': 18px,
+  'btn-color': #2EE8A9,
+  'primary-color': #3B43F2,
+);
+
+$color: (
+  'main-color': #332270,
+  'white': #fff,
+  'dark': #6D7783,
+  'title-dark': #222A41,
+);
+
+
+$text: (
+  'extra-small-font': 10px,
+  'small-font-size': 14px,
+  'medium-font-size': 15px,
+  'base-font-size': 16px,
+  'semi-font-size': 18px,
+  'big-font-size': 20px,
+
+  'base-line-height': 1.2,
+  'secondary-line-height': 1.4,
+);
+
+$font-weight: (
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'semi-bold': 600,
+  'bold': 700,
+  'extra-bold': 800,
+  'black': 900
+);
+
+$box-shadow: (
+  'base-shadow': 0px 12px 24px rgba(35, 25, 86, 0.1)
+);
+
+// Vars for forms
+$forms: (
+  'form-font-family': unquote("Arial, 'Helvetica Neue', Helvetica, sans-serif"),
+  'form-element-padding': unquote("0.4em 0.7em"),
+  'form-element-border-color': #999,
+  'form-element-focus-border-color': #000,
+  'placeholder-color': #999
+);
+
+// Breakpoints for include media mixin
+$breakpoints: (
+  'phone': 480px,
+  'tablet': 768px,
+  'desktop': 1024px,
+  'widescreen': 1200px
+);
+
+// Keywords for include media mixin
+$media-expressions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+);

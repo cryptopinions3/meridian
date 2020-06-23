@@ -1,0 +1,29 @@
+.services-card {
+  text-align: center;
+  // max-width: 225px;
+  margin: 12px 0;
+
+  &__inner {
+    background: map-get($base, 'base-background-color');
+    border-radius: map-get($base, 'base-border-radius');
+    height: 100%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    padding: 55px 10px 75px 10px;
+    max-width: 225px;
+  }
+  &__icon {
+    max-width: 76px;
+    margin: 0 auto 17px auto;
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .h3 {
+    color: map-get($color, 'title-dark');
+    font-weight: map-get($font-weight, 'medium');
+    margin-bottom: 15px;
+  }
+}

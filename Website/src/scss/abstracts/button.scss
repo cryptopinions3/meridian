@@ -1,0 +1,16 @@
+.btn {
+  // @include d-flex-justify-center;
+  // align-items: center;
+  padding: 16px 22px;
+  color: map-get($color, 'white');
+  background: map-get($base, 'btn-color');
+  font-family: map-get($base, 'base-font-sans-serif');
+  font-weight: map-get($font-weight, 'regular');
+  font-size: map-get($text, 'base-font-size');
+  border-radius: 25px;
+  transition: .3s;
+
+  &:hover {
+    opacity: .8;
+  }
+}

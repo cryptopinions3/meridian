@@ -1,0 +1,24 @@
+.timer {
+  &-header {
+    text-align: center;
+
+    span {
+      color: map-get($base, 'primary-color');
+      font-size: map-get($text, 'semi-font-size');
+      font-weight: map-get($font-weight, 'regular');
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .h3 {
+      color: map-get($color, 'title-dark');
+      font-size: 32px;
+      margin-bottom: 35px;
+    }
+  }
+
+  &-counter {
+    @include d-flex;
+    justify-content: center;
+  }
+}

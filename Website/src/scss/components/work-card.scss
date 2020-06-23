@@ -1,0 +1,113 @@
+.work {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 180px;
+
+  .container {
+    @media screen and (max-width: 480px) {
+      padding: 0;
+    }
+  }
+
+  @include media('>=tablet') {
+    padding-bottom: 72px;
+  }
+  .h2 {
+    color: map-get($color, 'white');
+    text-align: center;
+    margin-bottom: 72px;
+    font-size: 32px;
+
+    @include media('>=tablet') {
+      margin-bottom: 60px;
+      font-size: 60px;
+    }
+  }
+
+  &-details {
+    color: map-get($color, 'white');
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 20px;
+  }
+
+  &-holder {
+    padding: 60px 0 250px 0;
+    overflow: hidden;
+    @include media('>=tablet') {
+      padding: 55px 0 105px 0;
+    }
+  }
+
+  &::after,
+  &::before {
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    background: url('../images/img1.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 235px;
+    height: 270px;
+    bottom: 120px;
+    right: 0;
+    @include media('>=tablet') {
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  &::before {
+    content: '';
+    background: url('../images/dots.svg') no-repeat;
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    bottom: 140px;
+    right: 10px;
+    @include media('>=tablet') {
+      bottom: -10px;
+      right: 10px;
+    }
+  }
+}
+
+.work-list {
+  background: map-get($base, 'base-background-color');
+  padding: 50px 35px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto 125px auto;
+  @include media('>=tablet') {
+    padding: 32px 20px 24px 20px;
+  }
+}
+
+.work-card {
+  margin-bottom: 45px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  @include media('>=tablet') {
+    margin: 0;
+  }
+  &__icon {
+    max-width: 25px;
+    margin-bottom: 20px;
+    img,
+    svg {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .h3 {
+    font-weight: map-get($font-weight, 'medium');
+    color: map-get($color, 'title-dark');
+    margin-bottom: 25px;
+  }
+}
