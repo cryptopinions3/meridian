@@ -1,1 +1,3 @@
-npm i , gulp , npm build
+install node_modules - npm i,
+run project - gulp , 
+build project on prod - npm build
