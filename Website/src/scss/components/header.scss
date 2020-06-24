@@ -17,9 +17,17 @@
 
 .social {
   a {
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
     margin: 0 10px;
+    @include media('>=tablet') {
+      width: 20px;
+      height: 20px;
+    }
+    @include media('>=widescreen') {
+      width: 28px;
+      height: 28px;
+    }
     img,
     svg {
       display: block;
