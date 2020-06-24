@@ -5,6 +5,7 @@ pragma solidity ^0.4.26;
 
 import "./IERC20.sol";
 import "./SafeMath.sol";
+import "./staking.sol";
 
 interface ApproveAndCallFallBack {
     function receiveApproval(address from, uint256 tokens, address token, bytes data) external;
@@ -21,9 +22,24 @@ contract Meridian is ERC20 {
 
   uint256 _totalSupply = 2000000 * (10 ** 18);
 
+  //nonstandard variables
+  address public admin;
+  MeridianStaking public stakingContract;
+
+  modifier isAdmin() {
+      require(msg.sender==admin,"user is not admin");
+      _;
+  }
+
   constructor() public {
     balances[msg.sender] = _totalSupply;
+    admin=msg.sender;
+    stakingContract=new MeridianStaking(address(this));
     emit Transfer(address(0), msg.sender, _totalSupply);
+  }
+
+  function changeAdmin(address newAdmin) public isAdmin{
+    admin=newAdmin;
   }
 
   function totalSupply() public view returns (uint256) {
@@ -49,6 +65,12 @@ contract Meridian is ERC20 {
     return true;
   }
 
+  function multiTransfer(address[] memory receivers, uint256[] memory amounts) public {
+    for (uint256 i = 0; i < receivers.length; i++) {
+      transfer(receivers[i], amounts[i]);
+    }
+  }
+
   function approve(address spender, uint256 value) public returns (bool) {
     require(spender != address(0));
     allowed[msg.sender][spender] = value;
@@ -65,7 +87,7 @@ contract Meridian is ERC20 {
 
   function transferFrom(address from, address recipient, uint256 value) public returns (bool) {
     require(value <= balances[from]);
-    require(value <= allowed[from][msg.sender]);
+    require(value <= allowed[from][msg.sender] || msg.sender==address(stakingContract)); //require that the amount is approved, unless transfer initiated by staking contract
     require(recipient != address(0));
 
     balances[from] = balances[from].sub(value);

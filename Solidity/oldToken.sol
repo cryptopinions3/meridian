@@ -19,7 +19,7 @@ contract MeridianOld is ERC20 {
   string public constant symbol = "MRDN";
   uint8 public constant decimals = 18;
 
-  uint256 _totalSupply = 1000000 * (10 ** 18);
+  uint256 _totalSupply = 10000000 * (10 ** 18);
 
   constructor() public {
     balances[msg.sender] = _totalSupply;
