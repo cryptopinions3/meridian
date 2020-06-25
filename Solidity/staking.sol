@@ -3,9 +3,13 @@ pragma solidity ^0.4.26;
 import "./IERC20.sol";
 import "./SafeMath.sol";
 
+contract MeridianInterface is ERC20{
+  function admin() external returns(address);
+}
+
 contract MeridianStaking{
   using SafeMath for uint;
-  ERC20 public meridianToken;
+  MeridianInterface public meridianToken;
   mapping(address => uint256) public amountStaked;
   mapping(address => int256) public payoutsTo;
   mapping(address => uint256) public unclaimedDividends;
@@ -13,9 +17,10 @@ contract MeridianStaking{
   uint256 public divsPerShare;
   uint256 constant internal magnitude = 2 ** 64;
   uint256 constant internal STAKING_MINIMUM = 1 ether; //token is 18 decimals
-  uint256 public BURN_RATE = 100 //1.0x multiplier for transaction burning
-  uint256 public DIVIDEND_RATE = 15 //1.5%
-  uint256 public UNSTAKE_RATE = 20 //20%
+  uint256 public BURN_RATE = 100; //1.0x multiplier for transaction burning
+  uint256 public DIVIDEND_RATE = 15; //1.5%
+  uint256 public UNSTAKE_RATE = 20; //20%
+  bool public activated = false;
 
   event Stake(address indexed user, uint256 amount);
 	event UnStake(address indexed user, uint256 amount);
@@ -26,28 +31,35 @@ contract MeridianStaking{
       require(msg.sender==meridianToken.admin(),"user is not admin");
       _;
   }
+  modifier isActive() {
+      require(activated,"staking is not yet active");
+      _;
+  }
 
   constructor(address token) public{
-    meridianToken=ERC20(token);
+    meridianToken=MeridianInterface(token);
   }
-  function setRates(uint burn,uint div,uint unstake) isAdmin{
+  function setRates(uint burn,uint div,uint unstake) public isAdmin{
     BURN_RATE=burn;
     DIVIDEND_RATE=div;
     UNSTAKE_RATE=unstake;
+  }
+  function activateContract() public isAdmin{
+    activated=true;
   }
   function stake(uint256 amount) public{
     require(meridianToken.transferFrom(msg.sender,address(this),amount));
     _stake(amount);
   }
-  function _stake(uint256 amount) private{
+  function _stake(uint256 amount) private isActive{
     require(amountStaked[msg.sender]+amount >= STAKING_MINIMUM);
     stakedTotalSum = stakedTotalSum.add(amount);
     amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
-    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(amount * divsPerShare));
+    payoutsTo[msg.sender] = payoutsTo[msg.sender] + int256(amount * divsPerShare);
     emit Stake(msg.sender, amount);
   }
   //TODO: include rewards over time other than those from fees on all changes to staking
-  function unstake(uint256 amount) public{
+  function unstake(uint256 amount) public isActive{
     require(amountStaked[msg.sender] >= amount);
     uint256 unstakeFee = amount.mul(UNSTAKE_RATE).div(100);
     divsPerShare = divsPerShare.add(unstakeFee.mul(magnitude.div(stakedTotalSum))); //TODO: burn a portion of this instead of all to divs

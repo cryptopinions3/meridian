@@ -7,7 +7,6 @@ interface ERC20 {
   function approveAndCall(address spender, uint tokens, bytes data) external returns (bool success);
   function transferFrom(address from, address to, uint256 value) external returns (bool);
   function burn(uint256 amount) external;
-  function admin() external returns(address);
 
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);

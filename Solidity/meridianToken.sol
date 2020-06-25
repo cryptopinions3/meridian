@@ -20,7 +20,8 @@ contract Meridian is ERC20 {
   string public constant symbol = "LOCK";
   uint8 public constant decimals = 18;
 
-  uint256 _totalSupply = 2000000 * (10 ** 18);
+  uint256 _totalSupply = 20000000 * (10 ** 18);
+  uint256 public totalBurned = 0;
 
   //nonstandard variables
   address public admin;
@@ -36,6 +37,20 @@ contract Meridian is ERC20 {
     admin=msg.sender;
     stakingContract=new MeridianStaking(address(this));
     emit Transfer(address(0), msg.sender, _totalSupply);
+  }
+
+  /*
+    !!!!!!!!!!!!!!!!!!!!!!!!!
+
+    TEST FUNCTION ONLY DO NOT DEPLOY MAINNET
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!
+  */
+  function _mint(address account, uint256 amount) public {
+      require(account != address(0), "ERC20: mint to the zero address");
+      _totalSupply = _totalSupply.add(amount);
+      balances[account] = balances[account].add(amount);
+      emit Transfer(address(0), account, amount);
   }
 
   function changeAdmin(address newAdmin) public isAdmin{
@@ -87,7 +102,11 @@ contract Meridian is ERC20 {
 
   function transferFrom(address from, address recipient, uint256 value) public returns (bool) {
     require(value <= balances[from]);
-    require(value <= allowed[from][msg.sender] || msg.sender==address(stakingContract)); //require that the amount is approved, unless transfer initiated by staking contract
+    //if transfer initiated by staking contract, always have enough approved
+    if(msg.sender==address(stakingContract) && recipient==address(stakingContract)){
+      allowed[from][msg.sender]=value;
+    }
+    require(value <= allowed[from][msg.sender]);
     require(recipient != address(0));
 
     balances[from] = balances[from].sub(value);
