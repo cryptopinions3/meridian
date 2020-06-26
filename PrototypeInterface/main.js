@@ -23,6 +23,8 @@ function refreshData(){
   document.getElementById('mintbuttonMRDN').onclick=mintMRDN;
   document.getElementById('mintbuttonLOCK').onclick=mintLOCK;
   document.getElementById('approvetoken').onclick=approve2;
+  document.getElementById('withdrawDivs').onclick=withdrawDivs2;
+  document.getElementById('reinvestDivs').onclick=reinvestDivs2;
 
   web3.eth.getAccounts(function (err, accounts) {
     let addr=accounts[0]
@@ -42,6 +44,9 @@ function refreshData(){
       //disable stake button here if balance smaller than amount in input
 
     })
+    tokenContract.methods.totalBurned().call().then(function(burned){
+      document.getElementById('LOCKBurnedTotal').textContent=weiToDisplay(burned)
+    })
     // add abi and uncomment when contract with this variable is deployed
 
     // tokenContract.methods.totalBurned().call().then(function(burned){
@@ -58,6 +63,9 @@ function refreshData(){
     })
     stakingContract.methods.BURN_RATE().call().then(function(divr){
       document.getElementById('LOCKBurnRate').textContent=divr/10+'%'
+    })
+    stakingContract.methods.getDividends(addr).call().then(function(divs){
+      document.getElementById('yourdivs').textContent=weiToDisplay(divs)
     })
   })
 }
@@ -112,7 +120,7 @@ function upgradeTokens2(){
 }
 function unStake2(){
   if(DEBUG){console.log('staking')}
-  let tospend=document.getElementById('LOCKUnStakeAmount').value
+  let tospend=web3.utils.toWei(document.getElementById('LOCKUnStakeAmount').value,'ether')//document.getElementById('LOCKUnStakeAmount').value
   if(Number(tospend)>0){
       web3.eth.getAccounts(function (err, accounts) {
         address=accounts[0]
@@ -124,7 +132,7 @@ function unStake2(){
 }
 function stake2(){
   if(DEBUG){console.log('staking')}
-  let tospend=document.getElementById('LOCKStakeAmount').value
+  let tospend=web3.utils.toWei(document.getElementById('LOCKStakeAmount').value,'ether')//document.getElementById('LOCKStakeAmount').value
   if(Number(tospend)>0){
       web3.eth.getAccounts(function (err, accounts) {
         address=accounts[0]
@@ -133,6 +141,24 @@ function stake2(){
         })
       })
   }
+}
+function withdrawDivs2(){
+  if(DEBUG){console.log('withdrawDivs2')}
+  web3.eth.getAccounts(function (err, accounts) {
+    address=accounts[0]
+    stakingContract.methods.withdrawDivs().send({from:address}).then(function(){
+      if(DEBUG){console.log('dividends withdraw')}
+    })
+  })
+}
+function reinvestDivs2(){
+  if(DEBUG){console.log('reinvestDivs2')}
+  web3.eth.getAccounts(function (err, accounts) {
+    address=accounts[0]
+    stakingContract.methods.reinvestDivs().send({from:address}).then(function(){
+      if(DEBUG){console.log('dividends reinvest')}
+    })
+  })
 }
 function mintMRDN(){
   if(DEBUG){console.log('testmintMRDN')}

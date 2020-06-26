@@ -132,9 +132,10 @@ contract Meridian is ERC20 {
     return true;
   }
 
-  function burn(uint256 amount) external {
+  function burn(uint256 amount) public {
     require(amount != 0);
     require(amount <= balances[msg.sender]);
+    totalBurned = totalBurned.add(amount);
     _totalSupply = _totalSupply.sub(amount);
     balances[msg.sender] = balances[msg.sender].sub(amount);
     emit Transfer(msg.sender, address(0), amount);

@@ -12,11 +12,14 @@ contract MeridianStaking{
   MeridianInterface public meridianToken;
   mapping(address => uint256) public amountStaked;
   mapping(address => int256) public payoutsTo;
-  mapping(address => uint256) public unclaimedDividends;
+  mapping(address => uint256) public unclaimedDividends;//dividends over time before the last user checkpoint
+  mapping(address => uint256) public dividendCheckpoints;//the time from which to calculate new dividends
+  mapping(address => uint256) public dividendRateUsed;//
   uint256 public stakedTotalSum;
   uint256 public divsPerShare;
   uint256 constant internal magnitude = 2 ** 64;
   uint256 constant internal STAKING_MINIMUM = 1 ether; //token is 18 decimals
+  uint256 public STAKING_PERIOD = 31 days; //time period to which the dividend rate refers to
   uint256 public BURN_RATE = 100; //1.0x multiplier for transaction burning
   uint256 public DIVIDEND_RATE = 15; //1.5%
   uint256 public UNSTAKE_RATE = 20; //20%
@@ -48,11 +51,12 @@ contract MeridianStaking{
     activated=true;
   }
   function stake(uint256 amount) public{
-    require(meridianToken.transferFrom(msg.sender,address(this),amount));
+    require(meridianToken.transferFrom(msg.sender,address(this),amount),"transfer failed");
     _stake(amount);
   }
   function _stake(uint256 amount) private isActive{
-    require(amountStaked[msg.sender]+amount >= STAKING_MINIMUM);
+    require(amountStaked[msg.sender]+amount >= STAKING_MINIMUM,"amount below staking minimum");
+    updateCheckpoint(msg.sender);
     stakedTotalSum = stakedTotalSum.add(amount);
     amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
     payoutsTo[msg.sender] = payoutsTo[msg.sender] + int256(amount * divsPerShare);
@@ -61,6 +65,7 @@ contract MeridianStaking{
   //TODO: include rewards over time other than those from fees on all changes to staking
   function unstake(uint256 amount) public isActive{
     require(amountStaked[msg.sender] >= amount);
+    updateCheckpoint(msg.sender);
     uint256 unstakeFee = amount.mul(UNSTAKE_RATE).div(100);
     divsPerShare = divsPerShare.add(unstakeFee.mul(magnitude.div(stakedTotalSum))); //TODO: burn a portion of this instead of all to divs
     stakedTotalSum = stakedTotalSum.sub(amount);
@@ -82,6 +87,17 @@ contract MeridianStaking{
     emit ReStakeDivs(msg.sender, divs);
   }
   function getDividends(address user) public view returns(uint256){
-    return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+    uint burnedDivs = uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+    return burnedDivs+unclaimedDividends[user]+getNewDivsOverTime(user);
+  }
+  function updateCheckpoint(address user) private{
+    unclaimedDividends[user]+=getNewDivsOverTime(user);
+    dividendCheckpoints[user]=now;
+    dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
+  }
+  //Formula for dividends over time is (time_passed/staking_period)*staked_tokens*dividend_rate
+  function getNewDivsOverTime(address user) public view returns(uint256){
+    uint divRate=dividendRateUsed[user];
+    return now.sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
   }
 }
