@@ -119,7 +119,7 @@ function upgradeTokens2(){
   }
 }
 function unStake2(){
-  if(DEBUG){console.log('staking')}
+  if(DEBUG){console.log('unstaking')}
   let tospend=web3.utils.toWei(document.getElementById('LOCKUnStakeAmount').value,'ether')//document.getElementById('LOCKUnStakeAmount').value
   if(Number(tospend)>0){
       web3.eth.getAccounts(function (err, accounts) {

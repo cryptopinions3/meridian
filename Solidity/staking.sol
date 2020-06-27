@@ -57,7 +57,7 @@ contract MeridianStaking{
   }
   function _stake(uint256 amount) private isActive{
     require(amountStaked[msg.sender]+amount >= STAKING_MINIMUM,"amount below staking minimum");
-    updateCheckpoint(msg.sender);
+    updateCheckpoint(msg.sender,true);
     stakedTotalSum = stakedTotalSum.add(amount);
     amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
     payoutsTo[msg.sender] = payoutsTo[msg.sender] + int256(amount * divsPerShare);
@@ -66,23 +66,35 @@ contract MeridianStaking{
   //TODO: include rewards over time other than those from fees on all changes to staking
   function unstake(uint256 amount) public isActive{
     require(amountStaked[msg.sender] >= amount);
-    updateCheckpoint(msg.sender);
+    updateCheckpoint(msg.sender,true);
     uint256 unstakeFee = amount.mul(UNSTAKE_RATE).div(100);
-    divsPerShare = divsPerShare.add(unstakeFee.mul(magnitude.div(stakedTotalSum))); //TODO: burn a portion of this instead of all to divs
+    divsPerShare = divsPerShare.add(unstakeFee.mul(magnitude).div(stakedTotalSum)); //TODO: burn a portion of this instead of all to divs
     stakedTotalSum = stakedTotalSum.sub(amount);
     uint256 taxedAmount = amount.sub(unstakeFee);
     amountStaked[msg.sender] = amountStaked[msg.sender].sub(amount);
     payoutsTo[msg.sender] -= int256(taxedAmount * divsPerShare);
     emit UnStake(msg.sender, amount);
   }
+  function getUnstakeTestInfo(uint256 amount) external view returns(uint,uint,uint){
+    uint256 unstakeFee = amount.mul(UNSTAKE_RATE).div(100);
+    uint256 dpsPlus = unstakeFee.mul(magnitude.div(stakedTotalSum));
+    uint256 movers = magnitude.div(stakedTotalSum);
+    return (unstakeFee,dpsPlus,movers);
+  }
+  function getBDTestInfo() external view returns(int,int,uint){
+    address user=msg.sender;
+    return (int256(divsPerShare * amountStaked[user]),int256(divsPerShare * amountStaked[user]) - payoutsTo[user],uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]));
+  }
   function withdrawDivs() public{
+    updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
     payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
     payoutsToTime[msg.sender] += timeDivs;
     uint256 divs=burnedDivs+timeDivs;
     meridianToken.transfer(msg.sender,divs);
-    unclaimedDividends[msg.sender]=0;//since these have been transferred, set to zero
+    //no longer necessary with payoutsToTime
+    //unclaimedDividends[msg.sender]=0;//since these have been transferred, set to zero
     emit WithdrawDivs(msg.sender, divs);
   }
   /*
@@ -101,14 +113,12 @@ contract MeridianStaking{
     require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
     return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
   }
-  function getBDTestInfo() external view returns(int,int,uint){
-    address user=msg.sender;
-    return (int256(divsPerShare * amountStaked[user]),int256(divsPerShare * amountStaked[user]) - payoutsTo[user],uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]));
-  }
-  function updateCheckpoint(address user) private{
+  function updateCheckpoint(address user,bool updateRate) private{
     unclaimedDividends[user]+=getNewDivsOverTime(user);
     dividendCheckpoints[user]=now;
-    dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
+    if(updateRate){
+      dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
+    }
   }
   //recent divs over time plus previously recorded divs over time
   function getTotalDivsOverTime(address user) public view returns(uint256){
