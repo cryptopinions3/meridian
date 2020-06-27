@@ -11,7 +11,8 @@ contract MeridianStaking{
   using SafeMath for uint;
   MeridianInterface public meridianToken;
   mapping(address => uint256) public amountStaked;
-  mapping(address => int256) public payoutsTo;
+  mapping(address => int256) public payoutsTo;//only represents the portion of payouts from collective dividends
+  mapping(address => uint256) public payoutsToTime;//over time related payouts
   mapping(address => uint256) public unclaimedDividends;//dividends over time before the last user checkpoint
   mapping(address => uint256) public dividendCheckpoints;//the time from which to calculate new dividends
   mapping(address => uint256) public dividendRateUsed;//
@@ -75,29 +76,47 @@ contract MeridianStaking{
     emit UnStake(msg.sender, amount);
   }
   function withdrawDivs() public{
-    uint256 divs = getDividends(msg.sender);
-    payoutsTo[msg.sender] += int256(divs * magnitude);
+    uint256 burnedDivs = getBurnedDivs(msg.sender);
+    payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
+    uint256 timeDivs=getTotalDivsOverTime(msg.sender);
+    payoutsToTime[msg.sender] += timeDivs;
+    uint256 divs=burnedDivs+timeDivs;
     meridianToken.transfer(msg.sender,divs);
+    unclaimedDividends[msg.sender]=0;//since these have been transferred, set to zero
     emit WithdrawDivs(msg.sender, divs);
   }
+  /*
+  //UPDATE AFTER WITHDRAWDIVS IS DONE
   function reinvestDivs() public{
     uint256 divs = getDividends(msg.sender);
     payoutsTo[msg.sender] += int256(divs * magnitude);
     _stake(divs);
     emit ReStakeDivs(msg.sender, divs);
   }
-  function getDividends(address user) public view returns(uint256){
-    uint burnedDivs = uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
-    return burnedDivs+unclaimedDividends[user]+getNewDivsOverTime(user);
+  */
+  function getDividends(address user) external view returns(uint256){
+    return getBurnedDivs(user)+getTotalDivsOverTime(user);
+  }
+  function getBurnedDivs(address user) public view returns(uint256){
+    require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
+    return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+  }
+  function getBDTestInfo() external view returns(int,int,uint){
+    address user=msg.sender;
+    return (int256(divsPerShare * amountStaked[user]),int256(divsPerShare * amountStaked[user]) - payoutsTo[user],uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]));
   }
   function updateCheckpoint(address user) private{
     unclaimedDividends[user]+=getNewDivsOverTime(user);
     dividendCheckpoints[user]=now;
     dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
   }
+  //recent divs over time plus previously recorded divs over time
+  function getTotalDivsOverTime(address user) public view returns(uint256){
+    return unclaimedDividends[user].add(getNewDivsOverTime(user)).sub(payoutsToTime[user]);
+  }
   //Formula for dividends over time is (time_passed/staking_period)*staked_tokens*dividend_rate
   function getNewDivsOverTime(address user) public view returns(uint256){
-    uint divRate=dividendRateUsed[user];
+    uint256 divRate=dividendRateUsed[user];
     return now.sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
   }
 }
