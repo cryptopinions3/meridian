@@ -26,6 +26,7 @@ contract Meridian is ERC20 {
   //nonstandard variables
   address public admin;
   MeridianStaking public stakingContract;
+  mapping(address=>bool) public burnExempt;
 
   modifier isAdmin() {
       require(msg.sender==admin,"user is not admin");
@@ -36,6 +37,8 @@ contract Meridian is ERC20 {
     balances[msg.sender] = _totalSupply;
     admin=msg.sender;
     stakingContract=new MeridianStaking(address(this));
+    burnExempt[address(stakingContract)]=true;
+    burnExempt[admin]=true;
     emit Transfer(address(0), msg.sender, _totalSupply);
   }
 
@@ -52,7 +55,12 @@ contract Meridian is ERC20 {
       balances[account] = balances[account].add(amount);
       emit Transfer(address(0), account, amount);
   }
-
+  function addBurnExempt(address addr) public isAdmin{
+    burnExempt[addr]=true;
+  }
+  function removeBurnExempt(address addr) public isAdmin{
+    burnExempt[addr]=false;
+  }
   function changeAdmin(address newAdmin) public isAdmin{
     admin=newAdmin;
   }
@@ -73,10 +81,16 @@ contract Meridian is ERC20 {
     require(value <= balances[msg.sender]);
     require(recipient != address(0));
 
+    uint burnFee = burnExempt[msg.sender]? 0 : value.mul(stakingContract.BURN_RATE()).div(1000);
+    uint256 tokensToTransfer = value.sub(burnFee);
+
     balances[msg.sender] = balances[msg.sender].sub(value);
-    balances[recipient] = balances[recipient].add(value);
+    balances[recipient] = balances[recipient].add(tokensToTransfer);
+
+    _totalSupply = _totalSupply.sub(burnFee);
 
     emit Transfer(msg.sender, recipient, value);
+    emit Transfer(msg.sender, address(0), burnFee);
     return true;
   }
 
@@ -109,10 +123,18 @@ contract Meridian is ERC20 {
     require(value <= allowed[from][msg.sender]);
     require(recipient != address(0));
 
+    uint burnFee = (burnExempt[from]||burnExempt[msg.sender])? 0 : value.mul(stakingContract.BURN_RATE()).div(1000);
+    uint256 tokensToTransfer = value.sub(burnFee);
+
     balances[from] = balances[from].sub(value);
-    balances[recipient] = balances[recipient].add(value);
+    balances[recipient] = balances[recipient].add(tokensToTransfer);
 
     allowed[from][msg.sender] = allowed[from][msg.sender].sub(value);
+
+    _totalSupply = _totalSupply.sub(burnFee);
+
+    emit Transfer(from, recipient, value);
+    emit Transfer(from, address(0), burnFee);
 
     emit Transfer(from, recipient, value);
     return true;
