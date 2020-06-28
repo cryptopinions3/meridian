@@ -27,7 +27,7 @@ contract MeridianStaking{
   //Replaced with combining BURN_RATE and STAKE_DIV_FEE//uint256 public UNSTAKE_RATE = 20; //20%
   bool public activated = false;
 
-  bool public DEBUG=true;
+  bool public DEBUG=false;
   uint256 public nowTest=now;
 
   event Stake(address indexed user, uint256 amount);
@@ -113,15 +113,17 @@ contract MeridianStaking{
     meridianToken.transfer(msg.sender,divs);
     emit WithdrawDivs(msg.sender, divs);
   }
-  /*
-  //UPDATE AFTER WITHDRAWDIVS IS DONE
   function reinvestDivs() public{
-    uint256 divs = getDividends(msg.sender);
-    payoutsTo[msg.sender] += int256(divs * magnitude);
+    updateCheckpoint(msg.sender,false);
+    uint256 burnedDivs = getBurnedDivs(msg.sender);
+    payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
+    uint256 timeDivs=getTotalDivsOverTime(msg.sender);
+    payoutsToTime[msg.sender] += timeDivs;
+    uint256 divs=burnedDivs+timeDivs;
     _stake(divs);
     emit ReStakeDivs(msg.sender, divs);
   }
-  */
+
   function getDividends(address user) external view returns(uint256){
     return getBurnedDivs(user)+getTotalDivsOverTime(user);
   }
