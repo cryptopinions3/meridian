@@ -3,7 +3,7 @@ var DEBUG=true
 var minbuy=1
 var maxbuy=1000
 var startTime=0
-
+var upgradeApproved=false
 function main(){
     if(DEBUG){console.log('test')}
     refreshData()
@@ -38,11 +38,34 @@ function refreshData(){
     tokenContractOld.methods.balanceOf(addr).call().then(function(bal){
       document.getElementById('MRDNBalance').textContent=weiToDisplay(bal)
       //disable upgrade button here if balance smaller than amount in input
+      var val=document.getElementById('upgradeAmount').value
+      var inputAmount=web3.utils.toWei(val?val:"0",'ether')
+      if(upgradeApproved && Number(inputAmount)<=Number(bal)){
+        document.getElementById('upgradebutton').disabled=false
+      }
+      else{
+        document.getElementById('upgradebutton').disabled=true
+      }
+    })
+    tokenContractOld.methods.allowance(addr,upgradeContractAddress).call().then(function(approved){
+      if(approved==0){
+        upgradeApproved=false
+      }
+      else{
+        upgradeApproved=true
+      }
     })
     tokenContract.methods.balanceOf(addr).call().then(function(bal){
       document.getElementById('LOCKBalance').textContent=weiToDisplay(bal)
       //disable stake button here if balance smaller than amount in input
-
+      var val=document.getElementById('LOCKStakeAmount').value
+      var inputAmount=web3.utils.toWei(val?val:"0",'ether')
+      if(Number(inputAmount)<=Number(bal) || Number(inputAmount)<1){
+        document.getElementById('stakebutton').disabled=false
+      }
+      else{
+        document.getElementById('stakebutton').disabled=true
+      }
     })
     tokenContract.methods.totalBurned().call().then(function(burned){
       document.getElementById('LOCKBurnedTotal').textContent=weiToDisplay(burned)
@@ -57,6 +80,15 @@ function refreshData(){
     })
     stakingContract.methods.amountStaked(addr).call().then(function(staked){
       document.getElementById('LOCKStakedYours').textContent=weiToDisplay(staked)
+      //disable unstake button here if balance smaller than amount in input
+      var val=document.getElementById('LOCKUnStakeAmount').value
+      var inputAmount=web3.utils.toWei(val?val:"0",'ether')
+      if(Number(inputAmount)<=Number(staked) || Number(inputAmount)<=2){
+        document.getElementById('unstakebutton').disabled=false
+      }
+      else{
+        document.getElementById('unstakebutton').disabled=true
+      }
     })
     stakingContract.methods.DIVIDEND_RATE().call().then(function(divr){
       document.getElementById('LOCKDivRate').textContent=divr/10+'%'
@@ -164,7 +196,7 @@ function mintMRDN(){
   if(DEBUG){console.log('testmintMRDN')}
   web3.eth.getAccounts(function (err, accounts) {
     address=accounts[0]
-    tokenContractOld.methods._mint(address,web3.utils.toWei("10000",'ether')).send({from:address}).then(function(err,result){
+    tokenContractOld.methods._mint(address,web3.utils.toWei("500000",'ether')).send({from:address}).then(function(err,result){
       if(DEBUG){console.log('testmint')}
     })
   })
@@ -173,7 +205,7 @@ function mintLOCK(){
   if(DEBUG){console.log('testmintLOCK')}
   web3.eth.getAccounts(function (err, accounts) {
     address=accounts[0]
-    tokenContract.methods._mint(address,web3.utils.toWei("10000",'ether')).send({from:address}).then(function(err,result){
+    tokenContract.methods._mint(address,web3.utils.toWei("500000",'ether')).send({from:address}).then(function(err,result){
       if(DEBUG){console.log('testmint')}
     })
   })
