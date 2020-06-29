@@ -7,10 +7,10 @@ import "./SafeMath.sol";
 
 contract MeridianUpgrade{
   using SafeMath for uint;
-  
+
   ERC20 public oldToken;
   ERC20 public newToken;
-  uint public CONVERSION_PERCENT=200; //200%, percentage of new tokens you receive from putting in old tokens
+  uint public CONVERSION_PERCENT=100; //100%, percentage of new tokens you receive from putting in old tokens
   constructor(address tokenAddr1,address tokenAddr2) public{
     oldToken=ERC20(tokenAddr1);
     newToken=ERC20(tokenAddr2);

@@ -6,6 +6,7 @@ pragma solidity ^0.4.26;
 import "./IERC20.sol";
 import "./SafeMath.sol";
 import "./staking.sol";
+import "./upgrade.sol";
 
 interface ApproveAndCallFallBack {
     function receiveApproval(address from, uint256 tokens, address token, bytes data) external;
@@ -20,14 +21,23 @@ contract Meridian is ERC20 {
   string public constant symbol = "LOCK";
   uint8 public constant decimals = 18;
 
-  uint256 _totalSupply = 20000000 * (10 ** 18);
+  uint256 _totalSupply = 15000000 * (10 ** 18);
   uint256 public totalBurned = 0;
 
   //nonstandard variables
   address public admin;
   MeridianStaking public stakingContract;
+  MeridianUpgrade public upgradeContract;
   mapping(address=>bool) public burnExempt;
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
+  uint256 LOCKED_AMOUNT=5000000 ether;
+  /*
+    !!!!!!!!
+    CHANGE BEFORE LAUNCH
+    !!!!!!!!
+  */
+  uint256 unlockTime=now+5 minutes;//186 days;
+  address previousToken=0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
 
   modifier isAdmin() {
       require(msg.sender==admin,"user is not admin");
@@ -35,11 +45,18 @@ contract Meridian is ERC20 {
   }
 
   constructor() public {
-    balances[msg.sender] = _totalSupply;
+    balances[address(this)] = LOCKED_AMOUNT;
+    uint amountRemaining = _totalSupply.sub(LOCKED_AMOUNT);
     admin=msg.sender;
-    stakingContract=new MeridianStaking(address(this));
-    burnExempt[address(stakingContract)]=true;
-    burnExempt[admin]=true;
+    stakingContract = new MeridianStaking(address(this));
+    upgradeContract = new MeridianUpgrade(previousToken,address(this));
+    burnExempt[address(stakingContract)] = true;
+    burnExempt[address(upgradeContract)] = true;
+    burnExempt[admin] = true;
+    burnExempt[address(this)] = true;
+    balances[upgradeContract]=10000000 ether;
+    amountRemaining = amountRemaining.sub(balances[upgradeContract]);
+    balances[msg.sender] = amountRemaining;
     emit Transfer(address(0), msg.sender, _totalSupply);
   }
 
@@ -64,6 +81,14 @@ contract Meridian is ERC20 {
   }
   function permanentlyDisableBurnOnTransfer() public isAdmin{
     burnActive=false;
+  }
+  /*
+    After 6 months team can retrieve locked tokens
+  */
+  function retrieveLockedAmount(address to) public isAdmin{
+    require(now>unlockTime);
+    approve(msg.sender,LOCKED_AMOUNT);
+    transfer(address(this),to,LOCKED_AMOUNT);
   }
   function changeAdmin(address newAdmin) public isAdmin{
     admin=newAdmin;
