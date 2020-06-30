@@ -20,14 +20,19 @@ contract MeridianStaking{
   uint256 public divsPerShare;
   uint256 constant internal magnitude = 2 ** 64;
   uint256 constant internal STAKING_MINIMUM = 1 ether; //token is 18 decimals
-  uint256 public STAKING_PERIOD = 31 days; //time period to which the dividend rate refers to
+  uint256 public STAKING_PERIOD = 1 days; //time period to which the dividend rate refers to
   uint256 public BURN_RATE = 100; //10% transaction burns, unstaking burns, div withdraw burns
   uint public STAKE_DIV_FEE=50; //5% stake div fee
   uint256 public DIVIDEND_RATE = 15; //1.5%
   //Replaced with combining BURN_RATE and STAKE_DIV_FEE//uint256 public UNSTAKE_RATE = 20; //20%
   bool public activated = false;
+  //uint256 public contractEndTime=now+10 minutes;//now+62 days;
 
-  bool public DEBUG=false;
+/*
+!!!!!
+set DEBUG to false for mainnet
+*/
+  bool public DEBUG=true;
   uint256 public nowTest=now;
 
   event Stake(address indexed user, uint256 amount);
@@ -54,6 +59,10 @@ contract MeridianStaking{
   }
   function activateContract() public isAdmin{
     activated=true;
+  }
+  function burnAfterContractEnd() public isAdmin{
+    //require(now>contractEndTime);
+    meridianToken.burn(meridianToken.balanceOf(address(this)));
   }
   function setNowTest(uint256 newNow) public isAdmin{
     nowTest=newNow;
@@ -124,7 +133,7 @@ contract MeridianStaking{
     emit ReStakeDivs(msg.sender, divs);
   }
 
-  function getDividends(address user) external view returns(uint256){
+  function getDividends(address user) public view returns(uint256){
     return getBurnedDivs(user)+getTotalDivsOverTime(user);
   }
   function getBurnedDivs(address user) public view returns(uint256){
@@ -138,8 +147,8 @@ contract MeridianStaking{
       dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
     }
   }
-  function getTotalDivsOverTimeSubWithdrawFee(address user) external view returns(uint256){
-    uint256 baseDivs=getTotalDivsOverTime(user);
+  function getTotalDivsSubWithdrawFee(address user) external view returns(uint256){
+    uint256 baseDivs=getDividends(user);
     uint256 fee=baseDivs.mul(BURN_RATE).div(1000);
     return baseDivs.sub(fee);
   }
@@ -150,6 +159,9 @@ contract MeridianStaking{
   //Formula for dividends over time is (time_passed/staking_period)*staked_tokens*dividend_rate
   function getNewDivsOverTime(address user) public view returns(uint256){
     return getNow().sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
+  }
+  function getGlobalDebt() public view returns(uint256){
+
   }
   function getNow() public view returns(uint256){
     if(DEBUG){

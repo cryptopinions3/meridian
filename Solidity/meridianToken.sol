@@ -29,6 +29,7 @@ contract Meridian is ERC20 {
   MeridianStaking public stakingContract;
   MeridianUpgrade public upgradeContract;
   mapping(address=>bool) public burnExempt;
+  uint256 public TOKEN_BURN_RATE = 100;//10%
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
   uint256 LOCKED_AMOUNT=5000000 ether;
   /*
@@ -87,8 +88,10 @@ contract Meridian is ERC20 {
   */
   function retrieveLockedAmount(address to) public isAdmin{
     require(now>unlockTime);
-    approve(msg.sender,LOCKED_AMOUNT);
-    transfer(address(this),to,LOCKED_AMOUNT);
+    uint256 toRetrieve = balances[address(this)];
+    balances[to] = balances[to].add(toRetrieve);
+    balances[address(this)] = 0;
+    emit Transfer(address(this), to, toRetrieve);
   }
   function changeAdmin(address newAdmin) public isAdmin{
     admin=newAdmin;
@@ -110,7 +113,7 @@ contract Meridian is ERC20 {
     require(value <= balances[msg.sender]);
     require(recipient != address(0));
 
-    uint burnFee = (!burnActive)||burnExempt[msg.sender]? 0 : value.mul(stakingContract.BURN_RATE()).div(1000);
+    uint burnFee = (!burnActive)||burnExempt[msg.sender]? 0 : value.mul(TOKEN_BURN_RATE).div(1000);
     uint256 tokensToTransfer = value.sub(burnFee);
 
     balances[msg.sender] = balances[msg.sender].sub(value);
@@ -153,7 +156,7 @@ contract Meridian is ERC20 {
     require(value <= allowed[from][msg.sender]);
     require(recipient != address(0));
 
-    uint burnFee = ((!burnActive)||burnExempt[from]||burnExempt[msg.sender])? 0 : value.mul(stakingContract.BURN_RATE()).div(1000);
+    uint burnFee = ((!burnActive)||burnExempt[from]||burnExempt[msg.sender])? 0 : value.mul(TOKEN_BURN_RATE).div(1000);
     uint256 tokensToTransfer = value.sub(burnFee);
 
     balances[from] = balances[from].sub(value);
