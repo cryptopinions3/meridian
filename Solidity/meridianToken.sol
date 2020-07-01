@@ -37,7 +37,7 @@ contract Meridian is ERC20 {
     CHANGE BEFORE LAUNCH
     !!!!!!!!
   */
-  uint256 unlockTime=now+5 minutes;//186 days;
+  uint256 unlockTime=186 days;//now+5 minutes;//
   address previousToken=0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
 
   modifier isAdmin() {

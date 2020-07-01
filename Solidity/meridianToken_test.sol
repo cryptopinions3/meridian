@@ -14,6 +14,8 @@ contract testSuite {
     Actor a1;
     Actor a2;
     Actor a3;
+
+    event Print(uint val,string str);
     /// 'beforeAll' runs before all other tests
     /// More special functions are: 'beforeEach', 'beforeAll', 'afterEach' & 'afterAll'
     function beforeAll() public {
@@ -36,6 +38,27 @@ contract testSuite {
       a2.stake(2000 ether);
       Assert.equal(4000 ether,token.balanceOf(token.stakingContract()),"token balance should be equal");
     }
+    function testBurnWithdraw() public{
+      a2.unstake(2000 ether);
+      //emit Print((token.stakingContract()).getDividends(address(a2)),"a2 divs");
+      //emit Print((token.stakingContract()).getDividends(address(a1)),"a1 divs");
+      Assert.greaterThan(uint(10000 ether),token.balanceOf(address(a2)),"a2 should not have more than what they started with");
+      Assert.greaterThan(token.balanceOf(address(a2)),uint(9000 ether),"a2 should get back most");
+      //between 33 and 34 tokens, 1/3 of 100 tokens distributed from 2000 unstake (5%)
+      Assert.greaterThan(uint(34 ether),(token.stakingContract()).getDividends(address(a1)),"a1 should get divs");
+      Assert.greaterThan((token.stakingContract()).getDividends(address(a1)),uint(33 ether),"a1 should get divs");
+      Assert.greaterThan(uint(67 ether),(token.stakingContract()).getDividends(address(a2)),"a1 should get divs");
+      Assert.greaterThan((token.stakingContract()).getDividends(address(a2)),uint(66 ether),"a1 should get divs");
+      uint a1bal=token.balanceOf(address(a1));
+      a1.withdrawDivs();
+      uint a1bal2=token.balanceOf(address(a1));
+      uint a1baldif=a1bal2-a1bal;
+      Assert.greaterThan(uint(31 ether),a1baldif,"a1 should get divs in tokens");
+      Assert.greaterThan(a1baldif,uint(29 ether),"a1 should get divs in tokens");
+
+    }
+    //
+
     function checkSuccess() public {
         // Use 'Assert' to test the contract,
         // See documentation: https://remix-ide.readthedocs.io/en/latest/assert_library.html
@@ -48,7 +71,4 @@ contract testSuite {
         return true;
     }
 
-    function checkFailure() public {
-        Assert.equal(uint(1), uint(2), "1 is not equal to 2");
-    }
 }

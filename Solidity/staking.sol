@@ -138,7 +138,12 @@ set DEBUG to false for mainnet
   }
   function getBurnedDivs(address user) public view returns(uint256){
     require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
-    return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+    //if(int256(divsPerShare * amountStaked[user]) < payoutsTo[user]){
+    //  return 0;
+    //}
+    //else{
+      return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+    //}
   }
   function updateCheckpoint(address user,bool updateRate) private{
     unclaimedDividends[user]+=getNewDivsOverTime(user);
@@ -159,9 +164,6 @@ set DEBUG to false for mainnet
   //Formula for dividends over time is (time_passed/staking_period)*staked_tokens*dividend_rate
   function getNewDivsOverTime(address user) public view returns(uint256){
     return getNow().sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
-  }
-  function getGlobalDebt() public view returns(uint256){
-
   }
   function getNow() public view returns(uint256){
     if(DEBUG){
