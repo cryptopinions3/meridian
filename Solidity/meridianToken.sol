@@ -21,7 +21,7 @@ contract Meridian is ERC20 {
   string public constant symbol = "LOCK";
   uint8 public constant decimals = 18;
 
-  uint256 _totalSupply = 15000000 * (10 ** 18);
+  uint256 _totalSupply = 20000000 * (10 ** 18);
   uint256 public totalBurned = 0;
 
   //nonstandard variables

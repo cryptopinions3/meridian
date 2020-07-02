@@ -26,11 +26,12 @@ contract MeridianStaking{
   uint256 public DIVIDEND_RATE = 15; //1.5%
   //Replaced with combining BURN_RATE and STAKE_DIV_FEE//uint256 public UNSTAKE_RATE = 20; //20%
   bool public activated = false;
-  //uint256 public contractEndTime=now+10 minutes;//now+62 days;
+  uint256 public contractEndTime=0;
 
 /*
-!!!!!
+!!!!!!!!!!!!
 set DEBUG to false for mainnet
+!!!!!!!!!!!!
 */
   bool public DEBUG=true;
   uint256 public nowTest=now;
@@ -63,6 +64,15 @@ set DEBUG to false for mainnet
   function burnAfterContractEnd() public isAdmin{
     //require(now>contractEndTime);
     meridianToken.burn(meridianToken.balanceOf(address(this)));
+  }
+  function disableDividendAccumulation() public isAdmin{
+    contractEndTime=now;
+  }
+  function disableDividendAccumulationSpecific(uint256 endTime) public isAdmin{
+    contractEndTime=endTime;
+  }
+  function enableDividendAccumulation() public isAdmin{
+    contractEndTime=0;
   }
   function setNowTest(uint256 newNow) public isAdmin{
     nowTest=newNow;
@@ -166,11 +176,17 @@ set DEBUG to false for mainnet
     return getNow().sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
   }
   function getNow() public view returns(uint256){
-    if(DEBUG){
-      return nowTest;
-    }
-    else{
-      return now;
-    }
+      uint useNow=now;
+      if(DEBUG){
+        useNow=nowTest;
+      }
+      //have 'now' be assumed to be the contract end time, if the current time is later than that. This is to prevent accumulation of dividends after this point.
+      if(contractEndTime>0 && useNow>contractEndTime){
+        return contractEndTime;
+      }
+      else{
+        return useNow;
+      }
+
   }
 }

@@ -14,6 +14,7 @@ contract testSuite {
     Actor a1;
     Actor a2;
     Actor a3;
+    uint startTime=now;
 
     event Print(uint val,string str);
     /// 'beforeAll' runs before all other tests
@@ -53,11 +54,17 @@ contract testSuite {
       a1.withdrawDivs();
       uint a1bal2=token.balanceOf(address(a1));
       uint a1baldif=a1bal2-a1bal;
+      //subtract 10% burn fee
       Assert.greaterThan(uint(31 ether),a1baldif,"a1 should get divs in tokens");
       Assert.greaterThan(a1baldif,uint(29 ether),"a1 should get divs in tokens");
-
+      a2.withdrawDivs();
+      token.stakingContract().setTime
     }
-    //
+    function testTimeWithdraw() public{
+      Assert.equal(uint(0),token.stakingContract().getDividends(address(a1)),"a1 should not have divs here");
+      Assert.equal(uint(0),token.stakingContract().getDividends(address(a1)),"a2 should not have divs here");
+      token.stakingContract().setNowTest()
+    }
 
     function checkSuccess() public {
         // Use 'Assert' to test the contract,
