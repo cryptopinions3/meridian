@@ -23,7 +23,7 @@ contract MeridianStaking{
   uint256 public STAKING_PERIOD = 1 days; //time period to which the dividend rate refers to
   uint256 public BURN_RATE = 100; //10% transaction burns, unstaking burns, div withdraw burns
   uint public STAKE_DIV_FEE=50; //5% stake div fee
-  uint256 public DIVIDEND_RATE = 15; //1.5%
+  uint256 public DIVIDEND_RATE = 10;//1.0% //15; //1.5%
   //Replaced with combining BURN_RATE and STAKE_DIV_FEE//uint256 public UNSTAKE_RATE = 20; //20%
   bool public activated = false;
   uint256 public contractEndTime=0;
