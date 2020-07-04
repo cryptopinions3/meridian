@@ -38,7 +38,7 @@ contract Meridian is ERC20 {
     !!!!!!!!
   */
   uint256 unlockTime=186 days;//now+5 minutes;//
-  address previousToken=0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
+  address previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC; //0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
 
   modifier isAdmin() {
       require(msg.sender==admin,"user is not admin");
@@ -67,13 +67,14 @@ contract Meridian is ERC20 {
     TEST FUNCTION ONLY DO NOT DEPLOY MAINNET
 
     !!!!!!!!!!!!!!!!!!!!!!!!!
-  */
+
   function _mint(address account, uint256 amount) public {
       require(account != address(0), "ERC20: mint to the zero address");
       _totalSupply = _totalSupply.add(amount);
       balances[account] = balances[account].add(amount);
       emit Transfer(address(0), account, amount);
   }
+  */
   function addBurnExempt(address addr) public isAdmin{
     burnExempt[addr]=true;
   }

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian</title>
+  <script src="web3.min.js"></script>
+  <link rel="shortcut icon" href="http://front.webber-group.com.ua/meredian/assets/images/logo-m.ico" type="image/x-icon">
+  <link media="all" rel="stylesheet" href="vendor.css">
+  <link media="all" rel="stylesheet" href="styles.css">
+  <link href="css2.css" rel="stylesheet">
+</head>
+
+<body>
+    <section class="meridian-vault">
+        <div class="container">
+            <div class="row first-row">
+                <div class="col-xl-4 col-12">
+                    <div class="welcome-block">
+                        <h1 class="h2">Welcome to the Meridian Vault</h1>
+                        <h2 class="h3">
+                            Keep track and manage your LOCK holdings through our Vault
+                            interface
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-12">
+                    <div class="prices-block item-animation grey-bg d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="price-block">
+                                    <span class="h3 mint-text">LOCK Price</span>
+                                    <span id="lockPrice" class="big-size mb-3">0,27$</span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="divident-block">
+                                    <span class="h3 mint-text">Daily Dividend Rate</span>
+                                    <span id="LOCKDivRate" class="h2">?</span>%
+                                    <span class="h3 mint-text">Unstake Rate</span>
+                                    <span id="LOCKUnstakeRate" class="h2">?</span>%
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row second-row">
+                <div class="col-xl-4 col-12">
+                    <div class="grey-bg item-animation d-flex flex-column align-items-end">
+                        <h2 id="LOCKTotal" class="h2 w-100">?</h2>
+                        <h4 class="h4 mint-text w-100">LOCK Circulating Supply</h4>
+                        <div class="logo-block d-flex align-items-center justify-content-center">
+                            <img class="logo-raunded" src="logo-m.svg" alt="logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="grey-bg item-animation d-flex flex-column align-items-end">
+                        <h2 id="LOCKStaked" class="h2 w-100">?</h2>
+                        <h4 class="h4 mint-text w-100">Total LOCK Staked</h4>
+                        <div class="logo-block d-flex align-items-center justify-content-center">
+                            <img class="logo-raunded" src="logo-m.svg" alt="logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="grey-bg item-animation d-flex flex-column align-items-end">
+                        <h2 id="LOCKBurnedTotal" class="h2 w-100">?</h2>
+                        <h4 class="h4 mint-text w-100">Total LOCK Burned</h4>
+                        <div class="logo-block d-flex align-items-center justify-content-center">
+                            <img class="logo-raunded" src="logo-m.svg" alt="logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="divider"></div>
+                </div>
+            </div>
+            <div class="third-row row">
+                <div class="col-12">
+                    <div class="grey-bg item-animation d-flex">
+                        <div class="stake-block">
+                            <h4 class="h4 mb-3">Stake LOCK</h4>
+                            <h5 class="h5 mint-text mb-4">100 tokens minimum</h5>
+                            <input id="LOCKStakeAmount" type="text" class="input" placeholder="Amount of LOCK to stake">
+                            <button id="stakebutton" type="button" class="btn-primary">
+                                Stake LOCK
+                            </button>
+                        </div>
+                        <div class="stake-block">
+                            <h4 class="h4 mb-3">Unstake LOCK</h4>
+                            <h5 class="h5 mint-text mb-4">
+                                15% unstake fee ( 5% to holders &amp; 10% burned)
+                            </h5>
+                            <input id="LOCKUnStakeAmount" type="text" class="input" placeholder="Amount of LOCK to unstake">
+                            <button id="unstakebutton" type="button" class="btn-primary">
+                                unStake LOCK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row fourth-row">
+                <div class="col-xl-4 col-12">
+                    <div class="account-block d-flex  justify-content-center flex-column">
+                        <div class="logo-account mb-4">
+                            <svg width="50px" height="38px" viewBox="0 0 50 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                                <title>Group 2</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-216.000000, -1111.000000)">
+                                        <g id="Group-5" transform="translate(160.000000, 698.000000)">
+                                            <g id="Group-2" transform="translate(56.000000, 413.000000)">
+                                                <g id="Group">
+                                                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="-1.13686838e-13" width="49.5918367" height="37.2" rx="3"></rect>
+                                                    <path d="M3.6244898,1.2 L45.9673469,1.2 C47.2928303,1.2 48.3673469,2.2745166 48.3673469,3.6 L48.3673469,7.2 L48.3673469,7.2 L26.3265306,7.2 L1.2244898,7.2 L1.2244898,3.6 C1.2244898,2.2745166 2.2990064,1.2 3.6244898,1.2 Z" id="Rectangle-Copy-2" fill="#071D36"></path>
+                                                    <path d="M3.6244898,4.2 L45.9673469,4.2 C47.2928303,4.2 48.3673469,5.2745166 48.3673469,6.6 L48.3673469,10.2 L48.3673469,10.2 L26.3265306,10.2 L1.2244898,10.2 L1.2244898,6.6 C1.2244898,5.2745166 2.2990064,4.2 3.6244898,4.2 Z" id="Rectangle-Copy" fill="#FFFFFF"></path>
+                                                    <path d="M3.6244898,8.4 L45.9673469,8.4 C47.2928303,8.4 48.3673469,9.4745166 48.3673469,10.8 L48.3673469,14.4 L48.3673469,14.4 L30.6122449,14.4 C29.8399361,17.7518203 26.4966689,19.8429275 23.1448486,19.0706186 C21.2074327,18.6242094 19.5995778,17.2796286 18.8174118,15.451767 L18.3673469,14.4 L18.3673469,14.4 L1.2244898,14.4 L1.2244898,10.8 C1.2244898,9.4745166 2.2990064,8.4 3.6244898,8.4 Z" id="Rectangle-2" fill="#071D36"></path>
+                                                </g>
+                                                <ellipse id="Oval" fill="#071D36" cx="24.7959184" cy="27.6" rx="3.06122449" ry="3"></ellipse>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h2 class="h2">My Account</h2>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-6 col-12">
+                    <div class="grey-bg item-animation d-flex flex-column align-items-end">
+                        <h2 id="LOCKBalance" class="h2 w-100">?</h2>
+                        <h4 class="h4 mint-text w-100">Available LOCK</h4>
+                        <div class="logo-block d-flex align-items-center justify-content-center">
+                            <img class="logo-raunded" src="logo-m.svg" alt="logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-12">
+                    <div class="grey-bg item-animation d-flex flex-column align-items-end">
+                        <h2 id="LOCKStakedYours" class="h2 w-100">?</h2>
+                        <h4 class="h4 mint-text w-100">Staked LOCK</h4>
+                        <div class="logo-block d-flex align-items-center justify-content-center">
+                            <img class="logo-raunded" src="logo-m.svg" alt="logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row fifth-row">
+                <div class="offset-xl-4 col-xl-8">
+                    <div class="grey-bg item-animation">
+                        <h4 class="h4">Staked LOCK Dividends</h4>
+                        <h2 id="yourdivs" class="h2">?</h2>
+                        <h4 class="h4 mint-text mb-3">LOCK Dividends</h4>
+                        <button id="reinvestDivs" type="button" class="btn-primary">
+                            RE-INVEST DIVIDENDS
+                        </button>
+                        <button id="withdrawDivs" type="button" class="btn-primary btn-secondary">
+                            WITHDRAW DIVIDENDS
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="divider"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<script src="abi.js?v=0.1"></script>
+<script src="interface.js?v=0.1"></script>
+<script src="main.js?v=0.1"></script>
+</body></html>

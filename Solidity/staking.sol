@@ -19,7 +19,7 @@ contract MeridianStaking{
   uint256 public stakedTotalSum;
   uint256 public divsPerShare;
   uint256 constant internal magnitude = 2 ** 64;
-  uint256 constant internal STAKING_MINIMUM = 1 ether; //token is 18 decimals
+  uint256 constant internal STAKING_MINIMUM = 100 ether; //token is 18 decimals
   uint256 public STAKING_PERIOD = 1 days; //time period to which the dividend rate refers to
   uint256 public BURN_RATE = 100; //10% transaction burns, unstaking burns, div withdraw burns
   uint public STAKE_DIV_FEE=50; //5% stake div fee
@@ -172,6 +172,7 @@ set DEBUG to false for mainnet
     return unclaimedDividends[user].add(getNewDivsOverTime(user)).sub(payoutsToTime[user]);
   }
   //Formula for dividends over time is (time_passed/staking_period)*staked_tokens*dividend_rate
+  //All divided by 1000 to convert dividend rate to the appropriate units
   function getNewDivsOverTime(address user) public view returns(uint256){
     return getNow().sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
   }
