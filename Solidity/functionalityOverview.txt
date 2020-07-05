@@ -3,7 +3,7 @@ Meridian Token:
   * Includes ApproveAndCall, capable of interfacing with third party contracts without approve transaction
   * Includes multiTransfer, can send multiple tokens in single transaction, useful for airdrop
   * Includes administrative functions, administrator can hand over control to a new address, or set various parameters. Administrator for token is able to also administrate staking contract.
-  * Includes burn mechanism, burns occur on every transfer, burn rate can be set by administrator (is part of staking contract).
+  * Includes burn mechanism, burns occur on every transfer, burn rate is 10%, separate from staking burn rate.
   * Includes burn exception, administrator can choose Eth addresses which can transfer tokens without burning. Staking contract included by default here. For transferFrom, this exception applies to both the address sending the transaction and the 'from' address.
   * There is an admin function to permanently disable this transfer burn, to make the token more compatible with other smart contracts at a future date.
 
@@ -18,12 +18,12 @@ Staking Contract:
   * Contract to stake LOCK tokens and receive additional tokens back as dividends.
   * LOCK tokens are sent to staking contract on the creation of staking and token contracts. This amount can run out eventually at which point more will need to be sent or the contract will cease to function.
   * Admin adjustable variables: BURN_RATE (percentage burned for token transfers, unstaking, dividend withdrawal), DIVIDEND_RATE (explained below), STAKE_DIV_FEE (amount redistributed on unstaking), activated (whether users are able to use any functions, can only be set once).
-  * Requires 1 token minimum to be staked
+  * Requires 100 token minimum to be staked
   * Staking period of 1 days.
-  * Dividend rate (admin adjustable) of 1.5% (user rewarded with the amount staked multiplied by dividend rate over time for the staking period; for example staking for 10 days would get you approximately 0.5% of your staked amount given 1.5% rate).
+  * Dividend rate (admin adjustable) of 1.0% (user rewarded with the amount staked multiplied by dividend rate over time for the staking period; for example staking for 2 days would get you approximately 2.0% of your staked amount given 1.0% rate).
   * Dividend rate is applied when you stake (includes restaking). The dividend rate at the time a user last staked will be the rate at which they earn dividends until they stake more tokens or unstake tokens.
   * Additional dividends provided by unstaking fee (STAKE_DIV_FEE). On unstaking, user loses this percentage of their staked amount, and all staking users receive a portion of this percentage proportional to their amount staked / total amount staked.
   * Unstaking sends you the specified amount of your staked tokens directly, minus burn and div fee as percentage of amount unstaked. You now only earn dividends on your remaining staked tokens.
   * Withdrawing dividends burns a percentage of your dividends determined by BURN_RATE, before sending you the remaining dividends as LOCK tokens.
   * Restaking moves your current dividends to your staked amount, without burning.
-  * Admin function to burn all LOCK in staking contract, to be used at conclusion of staking program
+  * Admin function to permanently disable additional dividends, to be used at conclusion of staking program.

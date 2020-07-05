@@ -34,10 +34,19 @@ contract testSuite {
         a2=new Actor(IERC(token),IStake(token.stakingContract()));
         a3=new Actor(IERC(token),IStake(token.stakingContract()));
     }
+    function testTokenBurn() public{
+      //uint thisStart=token.balanceOf(address(this));
+      token.transfer(address(a3),token.balanceOf(address(this)));
+      a3.transferTokens(address(this),1000 ether);
+      Assert.greaterThan(uint(901 ether),token.balanceOf(address(this)),"tokens should transfer minus 10% fee 1");
+      Assert.greaterThan(token.balanceOf(address(this)),uint(899 ether),"tokens should transfer minus 10% fee 2");
+
+    }
     function testStake() public{
       a1.stake(1000 ether);
       a2.stake(2000 ether);
       Assert.equal(4000 ether,token.balanceOf(token.stakingContract()),"token balance should be equal");
+      Assert.equal(8000 ether,token.balanceOf(address(a2)),"a2 token balance should be reduced");
     }
     function testBurnWithdraw() public{
       a2.unstake(2000 ether);

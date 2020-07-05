@@ -26,4 +26,7 @@ contract Actor{
   function reinvestDivs() public{
     staking.reinvestDivs();
   }
+  function transferTokens(address a,uint amount) public{
+    token.transfer(a,amount);
+  }
 }

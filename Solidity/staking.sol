@@ -164,7 +164,7 @@ set DEBUG to false for mainnet
   }
   function getTotalDivsSubWithdrawFee(address user) external view returns(uint256){
     uint256 baseDivs=getDividends(user);
-    uint256 fee=baseDivs.mul(BURN_RATE).div(1000);
+    uint256 fee=baseDivs.mul(BURN_RATE).div(1000)+baseDivs.mul(STAKE_DIV_FEE).div(1000);
     return baseDivs.sub(fee);
   }
   //recent divs over time plus previously recorded divs over time

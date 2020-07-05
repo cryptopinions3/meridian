@@ -77,7 +77,7 @@ function refreshData(){
       })
 
     })
-    stakingContract.methods.getDividends(addr).call().then(function(divs){
+    stakingContract.methods.getTotalDivsSubWithdrawFee(addr).call().then(function(divs){//getDividends
       document.getElementById('yourdivs').textContent=weiToDisplay(divs)
     })
   })
@@ -114,7 +114,7 @@ function setTimer(days,hours,minutes,seconds){
   // document.getElementById('seconds').textContent=seconds.toFixed(2)
 }
 function weiToDisplay(wei){
-    return formatEthValue(web3.utils.fromWei(wei,'ether'))
+    return numberWithCommas(formatEthValue(web3.utils.fromWei(wei,'ether')))
 }
 function formatEthValue(ethstr){
     return parseFloat(parseFloat(ethstr).toFixed(2));
@@ -172,4 +172,7 @@ function reinvestDivs2(){
       if(DEBUG){console.log('dividends reinvest')}
     })
   })
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
