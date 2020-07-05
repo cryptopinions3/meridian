@@ -1,0 +1,266 @@
+.meridian-vault{
+    padding-top: calc(60px * 0.8);
+    padding-bottom: 20px;
+    background: map-get($color, 'section-bg' );
+    @media screen and (min-width: 1200px) {
+        .container {
+          max-width: 810px;
+        }
+    }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+        padding-right: calc(15px * 0.8);
+        padding-left: calc(15px * 0.8);
+    }
+    .grey-bg{
+        background: map-get($color, 'blocks-bg' );
+        padding:  calc(20px * 0.8);
+        border-radius: 10px;
+    }
+    .h2{
+        color: map-get($color, 'white' );
+        font-weight: 600;
+        font-size:calc(32px * 0.8);
+    }
+    .h3{
+
+        font-size:calc(24px * 0.8);
+    }
+    .h5{
+
+        font-size:calc(16px * 0.8);
+    }
+    .h4{
+        font-weight: 500;
+        color: map-get($color, 'white' );
+        font-size: calc(20px * 0.8);
+    }
+    .mint-text{
+        color: map-get($color, 'mint-text');
+        font-weight: 600;
+    }
+    .logo-block{
+        width: calc(70px * 0.8);
+        height:calc(70px * 0.8);
+        border: 2px solid #31FEDB;
+        border-radius: 50%;
+        box-shadow: 0 1px 7px 0 #30FBDD;
+        .logo-raunded{
+            width:  calc(43px * 0.8);
+            height: calc(33px * 0.8);
+        }
+    }
+    .first-row{
+        margin-bottom:  calc(30px * 0.8);
+        @include media('<=widescreen') {
+            margin-bottom: 50px;
+        }
+        .prices-block{
+            padding: 0;
+            > .row{
+                padding:  calc(40px * 0.8) 0;
+                width: 100%;
+                position: relative;
+                @include media('<=widescreen') {
+                    padding: calc(40px * 0.8);
+                    margin-left: 0;
+                }
+                 @include media('<=phone') {
+                    padding: calc(35px * 0.8);
+                }
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    height: 7px;
+                    border-radius: 0 0 10px 10px;
+                    background-color: #39EAAE;
+                    transition: 0.3s;
+                }
+            }
+
+        } 
+        .big-size{
+            font-size: calc(48px * 0.8);
+            color: map-get($color, 'white' );
+            font-weight: 600;
+            @include media('<=phone') {
+                font-size: map-deep-get($headings, 'sizes', 'h2-font-size');
+                font-weight: map-get($font-weight, 'bold' );
+            }
+        }
+        .price-block{
+            padding-left: calc(25px * 0.8);
+            @include media('<=widescreen') {
+                padding-left: 0;
+                margin-bottom: calc(50px * 0.8);
+            }
+            span{
+                width: 100%;
+                display: flex;
+            }
+        }
+        .divident-block{
+            padding-left: calc(15px * 0.8);
+            @include media('<=widescreen') {
+                padding-left: 0;
+            }
+            span{
+                width: 100%;
+                display: flex;
+                &.h2{
+                    margin-bottom: calc(50px * 0.8);
+                }
+                &.h3{
+                    margin-bottom: calc(20px * 0.8);
+                }
+            }
+        }
+    }
+    .btn-primary{
+        font-weight: 600;
+        color: #071D36;
+        text-transform: uppercase;
+        border: 2px solid #39EAAE;
+        border-radius:  calc(20px * 0.8);
+        background-color: #39EAAE;
+        font-size: calc(14px * 0.8);
+        padding:  calc(10px * 0.8);
+        width: 100%;
+        max-width:  calc(150px * 0.8);
+        transition: all 0.3s ease;
+        &:hover{
+            box-shadow: 0 1px 7px 0 #30FBDD;
+        }
+    }
+    .third-row{
+        margin-bottom: calc(50px * 0.8);
+        .grey-bg{
+            padding: calc(40px * 0.8) calc(20px * 0.8);
+            @include media('<=widescreen') {
+                flex-direction: column;
+            }
+        }
+        .stake-block{
+            margin-right: calc(50px * 0.8);
+            max-width: calc(390px * 0.8);
+            width: 100%;
+            .mint-text{
+                font-weight: 400;
+            }
+            &:first-of-type{
+                @include media('<=widescreen') {
+                    margin-bottom: calc(70px * 0.8);
+                }
+            }
+            .input{
+                color: map-get($color, 'white' );
+                border: calc(2px * 0.8)  solid #FFFFFF;
+                background: transparent;
+                border-radius: 5px;
+                padding: calc(11px * 0.8);
+                width: 100%;
+                font-size: 13px;
+                margin-bottom: calc(20px * 0.8); 
+                transition: all 0.25ms ease;
+                &::placeholder{
+                    color: map-get($color, 'white' );
+                }
+                &:focus{
+                    border: calc(2px * 0.8)  solid #39EAAE;
+                    transition: all 0.25ms ease;
+                }
+            }
+        }
+    }
+    .fifth-row{
+        .btn-primary{
+            max-width: calc(230px * 0.8);
+            margin-right: calc(20px * 0.8);
+            @include media('<=widescreen') {
+               margin-bottom: calc(15px * 0.8);
+            }
+            @include media('<=phone') {
+                margin-right: 0px;
+                margin-bottom: calc(15px * 0.8);
+             }
+        }
+        .btn-secondary{
+            color: map-get($color, 'mint-text');
+            background-color: transparent;
+            margin-right: 0;
+        }
+        .grey-bg{
+            padding: calc(40px * 0.8) calc(20px * 0.8);
+        }
+    }
+    .prices-block{
+        @include media('<=widescreen') {
+            flex-direction: column;
+          }
+    }
+    .divider{
+        margin-top: calc(50px * 0.8);
+        border-bottom: solid 1px #314C6F;
+        margin-bottom: calc(50px * 0.8);
+    }
+    .second-row{
+
+        .grey-bg{
+            @include media('<=widescreen') {
+                margin-bottom: calc(40px * 0.8);
+            }
+        }
+        .divider{
+            @include media('<=widescreen') {
+                margin-top: calc(10px * 0.8);
+            }
+        }
+        .mint-text{
+            @include media('<=phone') {
+                margin-bottom: calc(20px * 0.8);
+            }
+        }
+    }
+    .welcome-block{
+        .h2{
+            margin-top: calc(50px * 0.8);
+            margin-bottom: calc(35px * 0.8);
+            letter-spacing: 1.38px;
+            @include media('<=widescreen') {
+                margin-top: calc(20px * 0.8);
+                margin-bottom: calc(20px * 0.8);
+            }
+        }
+        .h3{
+            font-weight: 400;
+            color: map-get($color, 'white' );
+            @include media('<=widescreen') {
+                margin-bottom: 80px;
+            }
+        }
+    }
+    .account-block{
+        padding-top: calc(50px * 0.8);
+        padding-left: calc(55px * 0.8);
+        @include media('<=widescreen') {
+            margin-bottom: calc(50px * 0.8);
+            padding-left: 0;
+        }
+        
+    }
+    .fourth-row{
+        margin-bottom: calc(30px * 0.8);
+        @include media('<=widescreen') {
+            margin-bottom: 0px;
+        }  
+        .grey-bg{
+            @include media('<=widescreen') {
+                margin-bottom: calc(30px * 0.8);
+            }  
+        }
+    }
+}

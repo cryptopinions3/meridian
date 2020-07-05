@@ -8,7 +8,7 @@
 (($) => {
   $(() => {
     new FlipDown(1595278095, {
-      theme: "light",
+      theme: 'light',
     }).start();
   });
 })(jQuery);

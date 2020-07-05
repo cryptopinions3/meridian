@@ -6,10 +6,10 @@
 $headings: (
   'sizes': (
     'h1-font-size': 48px,
-    'h2-font-size': 60px,
+    'h2-font-size': 32px,
     'h3-font-size': 24px,
-    'h4-font-size': 21px,
-    'h5-font-size': 17px,
+    'h4-font-size': 20px,
+    'h5-font-size': 16px,
     'h6-font-size': 15px
   ),
   'fonts': (
@@ -40,6 +40,9 @@ $color: (
   'white': #fff,
   'dark': #6D7783,
   'title-dark': #222A41,
+  'section-bg': #071D36,
+  'blocks-bg': #1C3148,
+  'mint-text': #39EAAE,
 );
 
 
