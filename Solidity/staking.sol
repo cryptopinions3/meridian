@@ -33,7 +33,7 @@ contract MeridianStaking{
 set DEBUG to false for mainnet
 !!!!!!!!!!!!
 */
-  bool public DEBUG=true;
+  bool public DEBUG=false;
   uint256 public nowTest=now;
 
   event Stake(address indexed user, uint256 amount);
@@ -105,19 +105,7 @@ set DEBUG to false for mainnet
     meridianToken.transfer(msg.sender,taxedAmount);
     emit UnStake(msg.sender, amount);
   }
-  function getUnstakeTestInfo(uint256 amount) external view returns(uint,uint,uint){
-    uint256 divPortion=amount.mul(STAKE_DIV_FEE).div(1000);// dividends to be redistributed to users
-    uint256 burnPortion=amount.mul(BURN_RATE).div(1000);// tokens to be burned
-    uint256 unstakeFee = divPortion.add(burnPortion);
-    uint256 dpsPlus = unstakeFee.mul(magnitude).div(stakedTotalSum);
-    uint256 movers = magnitude.div(stakedTotalSum);
-    return (unstakeFee,dpsPlus,movers);
-  }
-  function getBDTestInfo() external view returns(int,int,uint){
-    address user=msg.sender;
-    return (int256(divsPerShare * amountStaked[user]),int256(divsPerShare * amountStaked[user]) - payoutsTo[user],uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]));
-  }
-  function withdrawDivs() public{
+  function withdrawDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
     payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
@@ -132,7 +120,7 @@ set DEBUG to false for mainnet
     meridianToken.transfer(msg.sender,divs);
     emit WithdrawDivs(msg.sender, divs);
   }
-  function reinvestDivs() public{
+  function reinvestDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
     payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
@@ -147,13 +135,13 @@ set DEBUG to false for mainnet
     return getBurnedDivs(user)+getTotalDivsOverTime(user);
   }
   function getBurnedDivs(address user) public view returns(uint256){
-    require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
-    //if(int256(divsPerShare * amountStaked[user]) < payoutsTo[user]){
-    //  return 0;
-    //}
-    //else{
+    //require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
+    if(int256(divsPerShare * amountStaked[user]) < payoutsTo[user]){
+      return 0;
+    }
+    else{
       return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
-    //}
+    }
   }
   function updateCheckpoint(address user,bool updateRate) private{
     unclaimedDividends[user]+=getNewDivsOverTime(user);
