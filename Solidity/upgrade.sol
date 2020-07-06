@@ -19,7 +19,7 @@ contract MeridianUpgrade{
     //transfer old tokens
     oldToken.transferFrom(msg.sender,address(this),amount);
     //user recieves tokens at given ratio
-    uint amountNew=amount.mul(CONVERSION_PERCENT).div(100);
+    uint amountNew=amount;//.mul(CONVERSION_PERCENT).div(100);
     newToken.transfer(msg.sender,amountNew);
   }
 }
