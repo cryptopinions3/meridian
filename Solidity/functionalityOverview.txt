@@ -9,7 +9,7 @@ Meridian Token:
 
 Upgrade Contract:
   * Contract to upgrade one token to another
-  * CONVERSION_PERCENT variable determines the ratio at which users receive new tokens for the inputted amount of old tokens. Currently 200% so 2 LOCK for every MRDN sent. Adjustable only before contract deployment.
+  * Tokens provided at 1:1 rate new for old
   * Old tokens remain locked in upgrade contract indefinitely.
   * New tokens must be manually supplied to the Upgrade contract. This is done by simply sending tokens to the contract.
   * MRDN does not have ApproveAndCall and so users must 'approve' the amount to be upgraded before using this contract.
