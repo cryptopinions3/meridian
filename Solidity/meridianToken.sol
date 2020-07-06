@@ -31,7 +31,7 @@ contract Meridian is ERC20 {
   mapping(address=>bool) public burnExempt;
   uint256 public TOKEN_BURN_RATE = 100;//10%
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
-  uint256 LOCKED_AMOUNT=5000000 ether;
+  //uint256 LOCKED_AMOUNT=5000000 ether;
   /*
     !!!!!!!!
     CHANGE BEFORE LAUNCH
@@ -46,8 +46,8 @@ contract Meridian is ERC20 {
   }
 
   constructor() public {
-    balances[address(this)] = LOCKED_AMOUNT;
-    uint amountRemaining = _totalSupply.sub(LOCKED_AMOUNT);
+    //balances[address(this)] = LOCKED_AMOUNT;
+    uint amountRemaining = _totalSupply;//.sub(LOCKED_AMOUNT);
     admin=msg.sender;
     stakingContract = new MeridianStaking(address(this));
     upgradeContract = new MeridianUpgrade(previousToken,address(this));
