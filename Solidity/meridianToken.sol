@@ -21,7 +21,7 @@ contract Meridian is ERC20 {
   string public constant symbol = "LOCK";
   uint8 public constant decimals = 18;
 
-  uint256 _totalSupply = 15000000 * (10 ** 18);
+  uint256 _totalSupply = 15500000 * (10 ** 18);
   uint256 public totalBurned = 0;
 
   //nonstandard variables
@@ -31,13 +31,13 @@ contract Meridian is ERC20 {
   mapping(address=>bool) public burnExempt;
   uint256 public TOKEN_BURN_RATE = 100;//10%
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
-  //uint256 LOCKED_AMOUNT=5000000 ether;
+  uint256 LOCKED_AMOUNT=500000 ether;
   /*
     !!!!!!!!
     CHANGE BEFORE LAUNCH
     !!!!!!!!
   */
-  uint256 unlockTime=186 days;//now+5 minutes;//
+  uint256 unlockTime=now+62 days;//now+5 minutes;//
   address previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC; //0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
 
   modifier isAdmin() {
@@ -46,8 +46,8 @@ contract Meridian is ERC20 {
   }
 
   constructor() public {
-    //balances[address(this)] = LOCKED_AMOUNT;
-    uint amountRemaining = _totalSupply;//.sub(LOCKED_AMOUNT);
+    balances[address(this)] = LOCKED_AMOUNT;
+    uint amountRemaining = _totalSupply.sub(LOCKED_AMOUNT);
     admin=msg.sender;
     stakingContract = new MeridianStaking(address(this));
     upgradeContract = new MeridianUpgrade(previousToken,address(this));
@@ -57,6 +57,8 @@ contract Meridian is ERC20 {
     burnExempt[address(this)] = true;
     balances[upgradeContract]=10000000 ether;
     amountRemaining = amountRemaining.sub(balances[upgradeContract]);
+    balances[stakingContract]=5000000 ether;
+    amountRemaining = amountRemaining.sub(balances[stakingContract]);
     balances[msg.sender] = amountRemaining;
     emit Transfer(address(0), msg.sender, _totalSupply);
   }
