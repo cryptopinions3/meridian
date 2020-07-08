@@ -68,6 +68,10 @@ set DEBUG to false for mainnet
   function disableDividendAccumulation() public isAdmin{
     contractEndTime=now;
   }
+  /*
+    !!!!!!!!
+    remove following three functions, disableDividendAccumulationSpecific enableDividendAccumulation and setNowTest, before mainnet, these are only for testing
+  */
   function disableDividendAccumulationSpecific(uint256 endTime) public isAdmin{
     contractEndTime=endTime;
   }
