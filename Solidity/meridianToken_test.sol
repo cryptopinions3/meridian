@@ -45,7 +45,7 @@ contract testSuite {
     function testStake() public{
       a1.stake(1000 ether);
       a2.stake(2000 ether);
-      Assert.equal(4000 ether,token.balanceOf(token.stakingContract()),"token balance should be equal");
+      Assert.equal(5004000 ether,token.balanceOf(token.stakingContract()),"token balance should be equal");
       Assert.equal(8000 ether,token.balanceOf(address(a2)),"a2 token balance should be reduced");
     }
     function testBurnWithdraw() public{

@@ -41,25 +41,34 @@ contract testSuite {
       a2.unstake(2000 ether);
       a2.withdrawDivs();
       a1.withdrawDivs();
-    }
-    function testTimeWithdraw() public{
-      Assert.equal(uint(0),token.stakingContract().getDividends(address(a1)),"a1 should not have divs here");
-      Assert.equal(uint(0),token.stakingContract().getDividends(address(a2)),"a2 should not have divs here");
+
       token.stakingContract().setNowTest(startTime+12 hours);
-      //emit Print(token.stakingContract().getDividends(address(a1)),"dividends after 12 hours a1");
-      //1k finney = 1 eth, looking for 5 (starts 1k, half of 1%)
-      Assert.greaterThan(uint(5010 finney),(token.stakingContract()).getDividends(address(a1)),"a1 should get time divs");
-      Assert.greaterThan((token.stakingContract()).getDividends(address(a1)),uint(4990 finney),"a1 should get time divs");
       a1.stake(1000); //update checkpoint and change staked balance, this should not affect divs
-      Assert.greaterThan(uint(5010 finney),(token.stakingContract()).getDividends(address(a1)),"a1 should get time divs");
-      Assert.greaterThan((token.stakingContract()).getDividends(address(a1)),uint(4990 finney),"a1 should get time divs");
-      a1.unstake(1000); //unstake should return unstaked amount minus fee, also should not affect divs
-
-      Assert.greaterThan(uint(5010 finney),(token.stakingContract()).getDividends(address(a1)),"a1 should get time divs");
-      Assert.greaterThan((token.stakingContract()).getDividends(address(a1)),uint(4990 finney),"a1 should get time divs");
-      Assert.equal(1000 ether,token.stakingContract().amountStaked(address(a1)),"a1 should have 1k staked at this stage");
+      a1.unstake(1000);
     }
 
+    function testDivRateChange() public{
+      a2.stake(1000 ether);
+      token.stakingContract().setNowTest(startTime+24 hours);//12 hours (previously set time) plus 12
+      token.stakingContract().setRates(100,15,50);//set div rate to 1.5% instead of 1.0%
+      //divs should be at the 1% rate still, since staked before change
+      Assert.greaterThan(uint(5010 finney),(token.stakingContract()).getDividends(address(a2)),"a2 should get time divs1");
+      Assert.greaterThan((token.stakingContract()).getDividends(address(a2)),uint(4990 finney),"a2 should get time divs2");
+      a2.stake(1000 ether);//2000 total staked
+      token.stakingContract().setNowTest(startTime+2 days);//add 1 day
+      //should have earned divs on new rate, plus old divs. 1.5% of 2k = 30, plus 5
+      Assert.greaterThan(uint(36 ether),(token.stakingContract()).getDividends(address(a2)),"a2 should get new rate time divs1");
+      Assert.greaterThan((token.stakingContract()).getDividends(address(a2)),uint(34 ether),"a2 should get new rate time divs2");
+
+    }
+    function testDivLimit() public{
+      token.stakingContract().disableDividendAccumulationSpecific(startTime+12 hours);
+      token.stakingContract().setNowTest(startTime+5 days);
+      //divs should not have changed, despite time being days later, because of the accumulation limit being set
+      Assert.greaterThan(uint(5010 finney),(token.stakingContract()).getDividends(address(a1)),"a1 should get time divs");
+      Assert.greaterThan((token.stakingContract()).getDividends(address(a1)),uint(4990 finney),"a1 should get time divs");
+
+    }
 
 
 }
