@@ -1,4 +1,4 @@
-pragma solidity ^0.4.26;
+pragma solidity 0.4.26;
 
 import "./IERC20.sol";
 import "./SafeMath.sol";
@@ -71,7 +71,7 @@ set DEBUG to false for mainnet
   /*
     !!!!!!!!
     remove following three functions, disableDividendAccumulationSpecific enableDividendAccumulation and setNowTest, before mainnet, these are only for testing
-  */
+
   function disableDividendAccumulationSpecific(uint256 endTime) public isAdmin{
     contractEndTime=endTime;
   }
@@ -81,6 +81,7 @@ set DEBUG to false for mainnet
   function setNowTest(uint256 newNow) public isAdmin{
     nowTest=newNow;
   }
+  */
   function stake(uint256 amount) public{
     require(meridianToken.transferFrom(msg.sender,address(this),amount),"transfer failed");
     _stake(amount);
@@ -115,7 +116,7 @@ set DEBUG to false for mainnet
     payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
     payoutsToTime[msg.sender] += timeDivs;
-    uint256 baseDivs=burnedDivs+timeDivs;
+    uint256 baseDivs=burnedDivs.add(timeDivs);
 
     uint256 burnFee=baseDivs.mul(BURN_RATE).div(1000);
     uint256 divs=baseDivs.sub(burnFee);
@@ -129,14 +130,14 @@ set DEBUG to false for mainnet
     uint256 burnedDivs = getBurnedDivs(msg.sender);
     payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
-    payoutsToTime[msg.sender] += timeDivs;
-    uint256 divs=burnedDivs+timeDivs;
+    payoutsToTime[msg.sender] = payoutsToTime[msg.sender].add(timeDivs);
+    uint256 divs=burnedDivs.add(timeDivs);
     _stake(divs);
     emit ReStakeDivs(msg.sender, divs);
   }
 
   function getDividends(address user) public view returns(uint256){
-    return getBurnedDivs(user)+getTotalDivsOverTime(user);
+    return getBurnedDivs(user).add(getTotalDivsOverTime(user));
   }
   function getBurnedDivs(address user) public view returns(uint256){
     //require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");

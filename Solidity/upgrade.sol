@@ -1,4 +1,4 @@
-pragma solidity ^0.4.26;
+pragma solidity 0.4.26;
 
 //Contract for upgrading Meridian Network tokens from MRDN to LOCK
 
@@ -10,7 +10,6 @@ contract MeridianUpgrade{
 
   ERC20 public oldToken;
   ERC20 public newToken;
-  uint public CONVERSION_PERCENT=100; //100%, percentage of new tokens you receive from putting in old tokens
   constructor(address tokenAddr1,address tokenAddr2) public{
     oldToken=ERC20(tokenAddr1);
     newToken=ERC20(tokenAddr2);

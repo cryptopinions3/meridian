@@ -1,4 +1,4 @@
-pragma solidity ^0.4.26;
+pragma solidity 0.4.26;
 
 
 // Meridian Network token
@@ -60,7 +60,7 @@ contract Meridian is ERC20 {
     balances[stakingContract]=5000000 ether;
     amountRemaining = amountRemaining.sub(balances[stakingContract]);
     balances[msg.sender] = amountRemaining;
-    emit Transfer(address(0), msg.sender, _totalSupply);
+    //emit Transfer(address(0), msg.sender, _totalSupply);
   }
 
   /*
@@ -87,7 +87,7 @@ contract Meridian is ERC20 {
     burnActive=false;
   }
   /*
-    After 6 months team can retrieve locked tokens
+    After 2 months team can retrieve locked tokens
   */
   function retrieveLockedAmount(address to) public isAdmin{
     require(now>unlockTime);
@@ -126,7 +126,9 @@ contract Meridian is ERC20 {
     totalBurned = totalBurned.add(burnFee);
 
     emit Transfer(msg.sender, recipient, tokensToTransfer);
-    emit Transfer(msg.sender, address(0), burnFee);
+    if(burnFee>0){
+      emit Transfer(msg.sender, address(0), burnFee);
+    }
     return true;
   }
 
@@ -171,9 +173,10 @@ contract Meridian is ERC20 {
     totalBurned = totalBurned.add(burnFee);
 
     emit Transfer(from, recipient, tokensToTransfer);
-    emit Transfer(from, address(0), burnFee);
+    if(burnFee>0){
+      emit Transfer(msg.sender, address(0), burnFee);
+    }
 
-    emit Transfer(from, recipient, value);
     return true;
   }
 
