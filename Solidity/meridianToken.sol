@@ -60,7 +60,6 @@ contract Meridian is ERC20 {
     balances[stakingContract]=5000000 ether;
     amountRemaining = amountRemaining.sub(balances[stakingContract]);
     balances[msg.sender] = amountRemaining;
-    //emit Transfer(address(0), msg.sender, _totalSupply);
   }
 
   /*

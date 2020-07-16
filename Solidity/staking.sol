@@ -9,6 +9,7 @@ contract MeridianInterface is ERC20{
 
 contract MeridianStaking{
   using SafeMath for uint;
+  using SignedSafeMath for int;
   MeridianInterface public meridianToken;
   mapping(address => uint256) public amountStaked;
   mapping(address => int256) public payoutsTo;//only represents the portion of payouts from collective dividends
@@ -87,11 +88,11 @@ set DEBUG to false for mainnet
     _stake(amount);
   }
   function _stake(uint256 amount) private isActive{
-    require(amountStaked[msg.sender]+amount >= STAKING_MINIMUM,"amount below staking minimum");
+    require(amountStaked[msg.sender].add(amount) >= STAKING_MINIMUM,"amount below staking minimum");
     updateCheckpoint(msg.sender,true);
     stakedTotalSum = stakedTotalSum.add(amount);
     amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
-    payoutsTo[msg.sender] = payoutsTo[msg.sender] + int256(amount * divsPerShare);
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(amount.mul(divsPerShare)));
     emit Stake(msg.sender, amount);
   }
   function unstake(uint256 amount) public isActive{
@@ -105,7 +106,7 @@ set DEBUG to false for mainnet
     stakedTotalSum = stakedTotalSum.sub(amount);
     uint256 taxedAmount = amount.sub(unstakeFee);
     amountStaked[msg.sender] = amountStaked[msg.sender].sub(amount);
-    payoutsTo[msg.sender] -= int256(amount * divsPerShare);
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].sub(int256(amount.mul(divsPerShare)));
     meridianToken.burn(burnPortion);//burn a portion of the fee
     meridianToken.transfer(msg.sender,taxedAmount);
     emit UnStake(msg.sender, amount);
@@ -113,9 +114,9 @@ set DEBUG to false for mainnet
   function withdrawDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
-    payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));//only use burnedDivs, since payoutsTo only pertains to these
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
-    payoutsToTime[msg.sender] += timeDivs;
+    payoutsToTime[msg.sender] = payoutsToTime[msg.sender].add(timeDivs);
     uint256 baseDivs=burnedDivs.add(timeDivs);
 
     uint256 burnFee=baseDivs.mul(BURN_RATE).div(1000);
@@ -128,7 +129,7 @@ set DEBUG to false for mainnet
   function reinvestDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
-    payoutsTo[msg.sender] += int256(burnedDivs * magnitude);//only use burnedDivs, since payoutsTo only pertains to these
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));//only use burnedDivs, since payoutsTo only pertains to these
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
     payoutsToTime[msg.sender] = payoutsToTime[msg.sender].add(timeDivs);
     uint256 divs=burnedDivs.add(timeDivs);
@@ -140,16 +141,16 @@ set DEBUG to false for mainnet
     return getBurnedDivs(user).add(getTotalDivsOverTime(user));
   }
   function getBurnedDivs(address user) public view returns(uint256){
-    //require(int256(divsPerShare * amountStaked[user]) >= payoutsTo[user],"divs overflow");
-    if(int256(divsPerShare * amountStaked[user]) < payoutsTo[user]){
+    //require(int256(divsPerShare.mul(amountStaked[user])) >= payoutsTo[user],"divs overflow");
+    if(int256(divsPerShare.mul(amountStaked[user])) < payoutsTo[user]){
       return 0;
     }
     else{
-      return uint256(int256(divsPerShare * amountStaked[user]) - payoutsTo[user]).div(magnitude);
+      return uint256(int256(divsPerShare.mul(amountStaked[user])).sub(payoutsTo[user])).div(magnitude);
     }
   }
   function updateCheckpoint(address user,bool updateRate) private{
-    unclaimedDividends[user]+=getNewDivsOverTime(user);
+    unclaimedDividends[user]=unclaimedDividends[user].add(getNewDivsOverTime(user));
     dividendCheckpoints[user]=getNow();
     if(updateRate){
       dividendRateUsed[user]=DIVIDEND_RATE;//locks in latest div rate. Done after unclaimedDividends updated, so divs from before this operation will be at the old rate.
@@ -157,7 +158,7 @@ set DEBUG to false for mainnet
   }
   function getTotalDivsSubWithdrawFee(address user) external view returns(uint256){
     uint256 baseDivs=getDividends(user);
-    uint256 fee=baseDivs.mul(BURN_RATE).div(1000)+baseDivs.mul(STAKE_DIV_FEE).div(1000);
+    uint256 fee=baseDivs.mul(BURN_RATE).div(1000).add(baseDivs.mul(STAKE_DIV_FEE).div(1000));
     return baseDivs.sub(fee);
   }
   //recent divs over time plus previously recorded divs over time
