@@ -30,12 +30,6 @@ contract MeridianStaking is ApproveAndCallFallBack{
   bool public activated = false;
   uint256 public contractEndTime=0;
 
-/*
-!!!!!!!!!!!!
-set DEBUG to false for mainnet
-!!!!!!!!!!!!
-*/
-  bool public DEBUG=false;
   uint256 public nowTest=now;
 
   event Stake(address indexed user, uint256 amount);
@@ -70,20 +64,6 @@ set DEBUG to false for mainnet
   function disableDividendAccumulation() public isAdmin{
     contractEndTime=now;
   }
-  /*
-    !!!!!!!!
-    remove following three functions, disableDividendAccumulationSpecific enableDividendAccumulation and setNowTest, before mainnet, these are only for testing
-
-  function disableDividendAccumulationSpecific(uint256 endTime) public isAdmin{
-    contractEndTime=endTime;
-  }
-  function enableDividendAccumulation() public isAdmin{
-    contractEndTime=0;
-  }
-  function setNowTest(uint256 newNow) public isAdmin{
-    nowTest=newNow;
-  }
-  */
 
   /*
     Used for staking, must send an approveAndCall to the token which will then call this function
@@ -176,16 +156,12 @@ set DEBUG to false for mainnet
     return getNow().sub(dividendCheckpoints[user]).mul(amountStaked[user]).mul(dividendRateUsed[user]).div(STAKING_PERIOD.mul(1000));
   }
   function getNow() public view returns(uint256){
-      uint useNow=now;
-      if(DEBUG){
-        useNow=nowTest;
-      }
       //have 'now' be assumed to be the contract end time, if the current time is later than that. This is to prevent accumulation of dividends after this point.
       if(contractEndTime>0 && useNow>contractEndTime){
         return contractEndTime;
       }
       else{
-        return useNow;
+        return now;
       }
 
   }

@@ -38,21 +38,6 @@ contract Meridian is ERC20, Ownable {
     emit Transfer(address(0), address(this), LOCKED_AMOUNT);
     emit Transfer(address(0), address(this), amountRemaining);
   }
-
-  /*
-    !!!!!!!!!!!!!!!!!!!!!!!!!
-
-    TEST FUNCTION ONLY DO NOT DEPLOY MAINNET
-
-    !!!!!!!!!!!!!!!!!!!!!!!!!
-
-  function _mint(address account, uint256 amount) public {
-      require(account != address(0), "ERC20: mint to the zero address");
-      _totalSupply = _totalSupply.add(amount);
-      balances[account] = balances[account].add(amount);
-      emit Transfer(address(0), account, amount);
-  }
-  */
   function addBurnExempt(address addr) public onlyOwner{
     burnExempt[addr]=true;
   }
