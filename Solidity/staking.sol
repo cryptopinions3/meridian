@@ -157,7 +157,7 @@ contract MeridianStaking is ApproveAndCallFallBack{
   }
   function getNow() public view returns(uint256){
       //have 'now' be assumed to be the contract end time, if the current time is later than that. This is to prevent accumulation of dividends after this point.
-      if(contractEndTime>0 && useNow>contractEndTime){
+      if(contractEndTime>0 && now>contractEndTime){
         return contractEndTime;
       }
       else{

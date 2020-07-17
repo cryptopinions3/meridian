@@ -28,7 +28,7 @@ contract Meridian is ERC20, Ownable {
   uint256 public TOKEN_BURN_RATE = 100; //represents 10%, shows 100 so that it may be adjusted to decimal precision
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
   uint256 LOCKED_AMOUNT=500000 * (10 ** 18);
-  uint256 unlockTime=now+62 days;
+  uint256 unlockTime=now + 62 days;
   address public previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC;
 
   constructor() public Ownable(){
@@ -36,7 +36,7 @@ contract Meridian is ERC20, Ownable {
     uint amountRemaining = _totalSupply.sub(LOCKED_AMOUNT);
     balances[msg.sender] = amountRemaining;
     emit Transfer(address(0), address(this), LOCKED_AMOUNT);
-    emit Transfer(address(0), address(this), amountRemaining);
+    emit Transfer(address(0), msg.sender, amountRemaining);
   }
   function addBurnExempt(address addr) public onlyOwner{
     burnExempt[addr]=true;
