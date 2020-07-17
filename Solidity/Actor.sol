@@ -15,7 +15,8 @@ contract Actor{
     token._mint(address(this),10000 ether);
   }
   function stake(uint amount) public{
-    staking.stake(amount);
+    //staking.stake(amount);
+    token.approveAndCall(address(staking),amount,abi.encodePacked(0));
   }
   function unstake(uint amount) public{
     staking.unstake(amount);

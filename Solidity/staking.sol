@@ -2,12 +2,14 @@ pragma solidity 0.4.26;
 
 import "./IERC20.sol";
 import "./SafeMath.sol";
+import "./SignedSafeMath.sol";
+import "./ApproveAndCallFallback.sol";
 
 contract MeridianInterface is ERC20{
-  function admin() external returns(address);
+  function owner() external returns(address);
 }
 
-contract MeridianStaking{
+contract MeridianStaking is ApproveAndCallFallBack{
   using SafeMath for uint;
   using SignedSafeMath for int;
   MeridianInterface public meridianToken;
@@ -16,16 +18,15 @@ contract MeridianStaking{
   mapping(address => uint256) public payoutsToTime;//over time related payouts
   mapping(address => uint256) public unclaimedDividends;//dividends over time before the last user checkpoint
   mapping(address => uint256) public dividendCheckpoints;//the time from which to calculate new dividends
-  mapping(address => uint256) public dividendRateUsed;//
+  mapping(address => uint256) public dividendRateUsed;
   uint256 public stakedTotalSum;
   uint256 public divsPerShare;
   uint256 constant internal magnitude = 2 ** 64;
-  uint256 constant internal STAKING_MINIMUM = 100 ether; //token is 18 decimals
+  uint256 constant internal STAKING_MINIMUM = 100 * (10 ** 18); //token is 18 decimals
   uint256 public STAKING_PERIOD = 1 days; //time period to which the dividend rate refers to
   uint256 public BURN_RATE = 100; //10% transaction burns, unstaking burns, div withdraw burns
-  uint public STAKE_DIV_FEE=50; //5% stake div fee
-  uint256 public DIVIDEND_RATE = 10;//1.0% //15; //1.5%
-  //Replaced with combining BURN_RATE and STAKE_DIV_FEE//uint256 public UNSTAKE_RATE = 20; //20%
+  uint public STAKE_DIV_FEE = 50; //5% stake div fee
+  uint256 public DIVIDEND_RATE = 10;//1.0%
   bool public activated = false;
   uint256 public contractEndTime=0;
 
@@ -43,7 +44,7 @@ set DEBUG to false for mainnet
   event ReStakeDivs(address indexed user, uint256 amount);
 
   modifier isAdmin() {
-      require(msg.sender==meridianToken.admin(),"user is not admin");
+      require(msg.sender==meridianToken.owner(),"user is not admin");
       _;
   }
   modifier isActive() {
@@ -83,17 +84,22 @@ set DEBUG to false for mainnet
     nowTest=newNow;
   }
   */
-  function stake(uint256 amount) public{
-    require(meridianToken.transferFrom(msg.sender,address(this),amount),"transfer failed");
-    _stake(amount);
+
+  /*
+    Used for staking, must send an approveAndCall to the token which will then call this function
+  */
+  function receiveApproval(address fromAddr, uint256 tokens, address token, bytes data) external{
+    require(msg.sender==address(meridianToken));
+    require(meridianToken.transferFrom(fromAddr,address(this),tokens),"transfer failed");
+    _stake(tokens,fromAddr);
   }
-  function _stake(uint256 amount) private isActive{
-    require(amountStaked[msg.sender].add(amount) >= STAKING_MINIMUM,"amount below staking minimum");
-    updateCheckpoint(msg.sender,true);
+  function _stake(uint256 amount,address fromAddr) private isActive{
+    require(amountStaked[fromAddr].add(amount) >= STAKING_MINIMUM,"amount below staking minimum");
+    updateCheckpoint(fromAddr,true);
     stakedTotalSum = stakedTotalSum.add(amount);
-    amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
-    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(amount.mul(divsPerShare)));
-    emit Stake(msg.sender, amount);
+    amountStaked[fromAddr] = amountStaked[fromAddr].add(amount);
+    payoutsTo[fromAddr] = payoutsTo[fromAddr].add(int256(amount.mul(divsPerShare)));
+    emit Stake(fromAddr, amount);
   }
   function unstake(uint256 amount) public isActive{
     require(amountStaked[msg.sender] >= amount);
@@ -101,7 +107,7 @@ set DEBUG to false for mainnet
 
     uint256 divPortion=amount.mul(STAKE_DIV_FEE).div(1000);// dividends to be redistributed to users
     uint256 burnPortion=amount.mul(BURN_RATE).div(1000);// tokens to be burned
-    uint256 unstakeFee = divPortion.add(burnPortion);//amount.mul(UNSTAKE_RATE).div(100);
+    uint256 unstakeFee = divPortion.add(burnPortion);
     divsPerShare = divsPerShare.add(divPortion.mul(magnitude).div(stakedTotalSum)); //portion of fee redistributed as divs, the rest to be burned
     stakedTotalSum = stakedTotalSum.sub(amount);
     uint256 taxedAmount = amount.sub(unstakeFee);
@@ -114,7 +120,7 @@ set DEBUG to false for mainnet
   function withdrawDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
-    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));//only use burnedDivs, since payoutsTo only pertains to these
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
     payoutsToTime[msg.sender] = payoutsToTime[msg.sender].add(timeDivs);
     uint256 baseDivs=burnedDivs.add(timeDivs);
@@ -129,11 +135,11 @@ set DEBUG to false for mainnet
   function reinvestDivs() public isActive{
     updateCheckpoint(msg.sender,false);
     uint256 burnedDivs = getBurnedDivs(msg.sender);
-    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));//only use burnedDivs, since payoutsTo only pertains to these
+    payoutsTo[msg.sender] = payoutsTo[msg.sender].add(int256(burnedDivs.mul(magnitude)));
     uint256 timeDivs=getTotalDivsOverTime(msg.sender);
     payoutsToTime[msg.sender] = payoutsToTime[msg.sender].add(timeDivs);
     uint256 divs=burnedDivs.add(timeDivs);
-    _stake(divs);
+    _stake(divs,msg.sender);
     emit ReStakeDivs(msg.sender, divs);
   }
 
@@ -141,7 +147,6 @@ set DEBUG to false for mainnet
     return getBurnedDivs(user).add(getTotalDivsOverTime(user));
   }
   function getBurnedDivs(address user) public view returns(uint256){
-    //require(int256(divsPerShare.mul(amountStaked[user])) >= payoutsTo[user],"divs overflow");
     if(int256(divsPerShare.mul(amountStaked[user])) < payoutsTo[user]){
       return 0;
     }

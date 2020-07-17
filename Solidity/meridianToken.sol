@@ -7,12 +7,11 @@ import "./IERC20.sol";
 import "./SafeMath.sol";
 import "./staking.sol";
 import "./upgrade.sol";
+import "./Ownable.sol";
+import "./ApproveAndCallFallback.sol";
 
-interface ApproveAndCallFallBack {
-    function receiveApproval(address from, uint256 tokens, address token, bytes data) external;
-}
 
-contract Meridian is ERC20 {
+contract Meridian is ERC20, Ownable {
   using SafeMath for uint256;
 
   mapping (address => uint256) public balances;
@@ -25,41 +24,19 @@ contract Meridian is ERC20 {
   uint256 public totalBurned = 0;
 
   //nonstandard variables
-  address public admin;
-  MeridianStaking public stakingContract;
-  MeridianUpgrade public upgradeContract;
   mapping(address=>bool) public burnExempt;
-  uint256 public TOKEN_BURN_RATE = 100;//10%
+  uint256 public TOKEN_BURN_RATE = 100; //represents 10%, shows 100 so that it may be adjusted to decimal precision
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
-  uint256 LOCKED_AMOUNT=500000 ether;
-  /*
-    !!!!!!!!
-    CHANGE BEFORE LAUNCH
-    !!!!!!!!
-  */
-  uint256 unlockTime=now+62 days;//now+5 minutes;//
-  address previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC; //0x163ad978C2353e3aA1D8B1a96B1a64c45Ccfa9D1;
+  uint256 LOCKED_AMOUNT=500000 * (10 ** 18);
+  uint256 unlockTime=now+62 days;
+  address public previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC;
 
-  modifier isAdmin() {
-      require(msg.sender==admin,"user is not admin");
-      _;
-  }
-
-  constructor() public {
+  constructor() public Ownable(){
     balances[address(this)] = LOCKED_AMOUNT;
     uint amountRemaining = _totalSupply.sub(LOCKED_AMOUNT);
-    admin=msg.sender;
-    stakingContract = new MeridianStaking(address(this));
-    upgradeContract = new MeridianUpgrade(previousToken,address(this));
-    burnExempt[address(stakingContract)] = true;
-    burnExempt[address(upgradeContract)] = true;
-    burnExempt[admin] = true;
-    burnExempt[address(this)] = true;
-    balances[upgradeContract]=10000000 ether;
-    amountRemaining = amountRemaining.sub(balances[upgradeContract]);
-    balances[stakingContract]=5000000 ether;
-    amountRemaining = amountRemaining.sub(balances[stakingContract]);
     balances[msg.sender] = amountRemaining;
+    emit Transfer(address(0), address(this), LOCKED_AMOUNT);
+    emit Transfer(address(0), address(this), amountRemaining);
   }
 
   /*
@@ -76,27 +53,24 @@ contract Meridian is ERC20 {
       emit Transfer(address(0), account, amount);
   }
   */
-  function addBurnExempt(address addr) public isAdmin{
+  function addBurnExempt(address addr) public onlyOwner{
     burnExempt[addr]=true;
   }
-  function removeBurnExempt(address addr) public isAdmin{
+  function removeBurnExempt(address addr) public onlyOwner{
     burnExempt[addr]=false;
   }
-  function permanentlyDisableBurnOnTransfer() public isAdmin{
+  function permanentlyDisableBurnOnTransfer() public onlyOwner{
     burnActive=false;
   }
   /*
     After 2 months team can retrieve locked tokens
   */
-  function retrieveLockedAmount(address to) public isAdmin{
+  function retrieveLockedAmount(address to) public onlyOwner{
     require(now>unlockTime);
     uint256 toRetrieve = balances[address(this)];
     balances[to] = balances[to].add(toRetrieve);
     balances[address(this)] = 0;
     emit Transfer(address(this), to, toRetrieve);
-  }
-  function changeAdmin(address newAdmin) public isAdmin{
-    admin=newAdmin;
   }
 
   function totalSupply() public view returns (uint256) {
@@ -115,7 +89,13 @@ contract Meridian is ERC20 {
     require(value <= balances[msg.sender]);
     require(recipient != address(0));
 
-    uint burnFee = (!burnActive)||burnExempt[msg.sender]? 0 : value.mul(TOKEN_BURN_RATE).div(1000);
+    uint burnFee;
+    if((!burnActive)||burnExempt[msg.sender]){
+      burnFee=0;
+    }
+    else{
+      burnFee=value.mul(TOKEN_BURN_RATE).div(1000);
+    }
     uint256 tokensToTransfer = value.sub(burnFee);
 
     balances[msg.sender] = balances[msg.sender].sub(value);
@@ -153,14 +133,16 @@ contract Meridian is ERC20 {
 
   function transferFrom(address from, address recipient, uint256 value) public returns (bool) {
     require(value <= balances[from]);
-    //if transfer initiated by staking contract, always have enough approved
-    if(msg.sender==address(stakingContract) && recipient==address(stakingContract)){
-      allowed[from][msg.sender]=value;
-    }
     require(value <= allowed[from][msg.sender]);
     require(recipient != address(0));
 
-    uint burnFee = ((!burnActive)||burnExempt[from]||burnExempt[msg.sender])? 0 : value.mul(TOKEN_BURN_RATE).div(1000);
+    uint burnFee;
+    if((!burnActive)||burnExempt[from]||burnExempt[msg.sender]){
+      burnFee=0;
+    }
+    else{
+      burnFee=value.mul(TOKEN_BURN_RATE).div(1000);
+    }
     uint256 tokensToTransfer = value.sub(burnFee);
 
     balances[from] = balances[from].sub(value);
