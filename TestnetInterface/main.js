@@ -149,9 +149,12 @@ function stake2(){
   if(Number(tospend)>0){
       web3.eth.getAccounts(function (err, accounts) {
         address=accounts[0]
-        stakingContract.methods.stake(tospend).send({from:address}).then(function(){
-          if(DEBUG){console.log('staking transaction sent')}
+        tokenContract.methods.approveAndCall(stakingContractAddress,tospend,"0x0000000000000000000000000000000000000000").send({from:address}).then(function(){
+          if(DEBUG){console.log('staking transaction sent approveandcall')}
         })
+        // stakingContract.methods.stake(tospend).send({from:address}).then(function(){
+        //   if(DEBUG){console.log('staking transaction sent')}
+        // })
       })
   }
 }

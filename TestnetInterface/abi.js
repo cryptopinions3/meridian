@@ -37,6 +37,20 @@ tokenAbi=[
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "to",
+				"type": "address"
+			}
+		],
+		"name": "retrieveLockedAmount",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [],
 		"name": "totalSupply",
@@ -103,6 +117,25 @@ tokenAbi=[
 				"type": "address"
 			}
 		],
+		"name": "burnExempt",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
 		"name": "balances",
 		"outputs": [
 			{
@@ -122,6 +155,20 @@ tokenAbi=[
 			{
 				"name": "",
 				"type": "uint8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "TOKEN_BURN_RATE",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -169,15 +216,11 @@ tokenAbi=[
 		"constant": false,
 		"inputs": [
 			{
-				"name": "account",
+				"name": "addr",
 				"type": "address"
-			},
-			{
-				"name": "amount",
-				"type": "uint256"
 			}
 		],
-		"name": "_mint",
+		"name": "removeBurnExempt",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -207,6 +250,15 @@ tokenAbi=[
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [],
+		"name": "permanentlyDisableBurnOnTransfer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
@@ -227,16 +279,39 @@ tokenAbi=[
 	},
 	{
 		"constant": false,
-		"inputs": [
-			{
-				"name": "newAdmin",
-				"type": "address"
-			}
-		],
-		"name": "changeAdmin",
+		"inputs": [],
+		"name": "renounceOwnership",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "burnActive",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -327,6 +402,20 @@ tokenAbi=[
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "addBurnExempt",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [],
 		"name": "totalBurned",
@@ -364,23 +453,23 @@ tokenAbi=[
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "stakingContract",
-		"outputs": [
+		"constant": false,
+		"inputs": [
 			{
-				"name": "",
+				"name": "newOwner",
 				"type": "address"
 			}
 		],
+		"name": "transferOwnership",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "admin",
+		"name": "previousToken",
 		"outputs": [
 			{
 				"name": "",
@@ -396,6 +485,23 @@ tokenAbi=[
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -513,20 +619,6 @@ stakingAbi=[
 		"constant": true,
 		"inputs": [],
 		"name": "activated",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "DEBUG",
 		"outputs": [
 			{
 				"name": "",
@@ -665,20 +757,6 @@ stakingAbi=[
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newNow",
-				"type": "uint256"
-			}
-		],
-		"name": "setNowTest",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -718,6 +796,32 @@ stakingAbi=[
 	},
 	{
 		"constant": false,
+		"inputs": [
+			{
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokens",
+				"type": "uint256"
+			},
+			{
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "receiveApproval",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
 		"inputs": [],
 		"name": "activateContract",
 		"outputs": [],
@@ -732,47 +836,6 @@ stakingAbi=[
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "stake",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "getUnstakeTestInfo",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -801,15 +864,6 @@ stakingAbi=[
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "enableDividendAccumulation",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -954,28 +1008,6 @@ stakingAbi=[
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getBDTestInfo",
-		"outputs": [
-			{
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
 		"name": "BURN_RATE",
 		"outputs": [
 			{
@@ -985,20 +1017,6 @@ stakingAbi=[
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "endTime",
-				"type": "uint256"
-			}
-		],
-		"name": "disableDividendAccumulationSpecific",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

@@ -58,7 +58,6 @@ contract MeridianStaking is ApproveAndCallFallBack{
     activated=true;
   }
   function burnAfterContractEnd() public isAdmin{
-    //require(now>contractEndTime);
     meridianToken.burn(meridianToken.balanceOf(address(this)));
   }
   function disableDividendAccumulation() public isAdmin{
