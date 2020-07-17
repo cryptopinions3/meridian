@@ -10,6 +10,9 @@ contract IStake{
   function getTotalDivsSubWithdrawFee(address user) external view returns(uint256);
   function activateContract() public;
   function burnAfterContractEnd() public;
+  function setNowTest(uint256 newNow) public;
+  function disableDividendAccumulationSpecific(uint256 endTime) public;
+  function amountStaked(address a) public view returns(uint256);
 }
 contract IUpgrade{
   function upgrade(uint amount) external;
