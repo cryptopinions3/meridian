@@ -14,7 +14,9 @@
   font-family: "Montserrat-Bold";
   src: url(fontfamily/Montserrat-Bold.ttf);
 }
-
+button[disabled]{
+  background-color: grey !important;
+}
 body {
   margin: 0;
   padding: 0;
@@ -472,8 +474,8 @@ header:after {
 }
 .coming-soon .btn-swap {
   border-radius: 30px;
-  background-color: #b4b4b4;
-  color: #d2d2d2;
+  background-color: #2ee8a9;
+  color: #fff;
   font-family: "Montserrat-Medium";
   font-size: 18px;
   letter-spacing: 0;
@@ -583,7 +585,7 @@ header:after {
 }
 
 .stake_lock .btn {
-  background: #b4b4b4;
+  background: #2ee8a9;
   color: #fbfbfb;
   border-radius: 30px;
   font-family: "Montserrat-Medium";

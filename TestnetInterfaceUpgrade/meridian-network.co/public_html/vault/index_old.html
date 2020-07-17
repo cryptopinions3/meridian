@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meridian</title>
+  <script src="web3.min.js"></script>
+</head>
+<body>
+  <div>
+    <button id="mintbuttonMRDN">Mint Test Tokens MRDN</button>
+    <button id="mintbuttonLOCK">Mint Test Tokens LOCK</button>
+    <br>
+    Total MRDN: <span id="MRDNTotal">?</span>
+    <br>
+    Total LOCK: <span id="LOCKTotal">?</span>
+    <br>
+    Your MRDN: <span id="MRDNBalance">?</span>
+    <br>
+    Your LOCK: <span id="LOCKBalance">?</span>
+    <br>
+    <button id="approvetoken">APPROVE TOKEN</button>
+    <button id="upgradebutton">Upgrade Tokens</button>
+    <input type="number" id="upgradeAmount"/>
+    <br>
+    Total Staked LOCK: <span id="LOCKStaked">?</span>
+    <br>
+    Your Staked LOCK: <span id="LOCKStakedYours">?</span>
+    <br>
+    <button id="stakebutton">Stake Meridian</button>
+    <input type="number" id="LOCKStakeAmount"/>
+    <br>
+    <button id="unstakebutton">UnStake Meridian</button>
+    <input type="number" id="LOCKUnStakeAmount"/>
+    <br>
+    Your Dividends: <span id="yourdivs">?</span>
+    <button id="withdrawDivs">Withdraw Dividends</button>
+    <button id="reinvestDivs">Reinvest Dividends</button>
+    <br>
+    Total burned amount: <span id="LOCKBurnedTotal">?</span>
+    <br>
+    Monthly Dividend rate: <span id="LOCKDivRate">?</span>
+    <br>
+    Monthly Burn rate: <span id="LOCKBurnRate">?</span>
+    <br>
+  </div>
+  <script src="abi.js?v=0.1"></script>
+  <script src="interface.js?v=0.1"></script>
+  <script src="main.js?v=0.1"></script>
+</body>
+</html>

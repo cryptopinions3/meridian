@@ -2,292 +2,746 @@
 <html>
 
 <head>
-  <title>meridian Network</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-  <link rel="stylesheet" type="text/css" href="css/animate.css" />
-  <link rel="stylesheet" type="text/css" href="css/hover.css" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <title>meridian Network</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+   <link rel="stylesheet" type="text/css" href="css/style.css" />
+   <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+   <link rel="stylesheet" type="text/css" href="css/animate.css" />
+   <link rel="stylesheet" type="text/css" href="css/hover.css" />
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-  <div class="instruction-wrapper">
-    <header class="header">
-      <div class="container">
-        <div class="topbar">
-          <div class="pull-left">
-            <div class="media">
-              <div class="media-left">
-                <a href="index.html" class="">
-                  <img class="media-object" src="images/logo.png" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">meridian</h4>
-                <small>Network</small>
-              </div>
+   <div class="wrapper">
+      <header>
+         <div class="container">
+            <div class="topbar">
+               <div class="pull-left">
+                  <div class="media">
+                     <div class="media-left">
+                        <a href="#" class="">
+                           <img class="media-object" src="images/logo.png" alt="...">
+                        </a>
+                     </div>
+                     <div class="media-body">
+                        <h4 class="media-heading">meridian</h4>
+                        <small>Network</small>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="pull-right">
+                  <ul>
+                     <li>
+                        <a href="https://app.uniswap.org/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&outputCurrency=0x896a07e3788983ec52eaf0f9c6f6e031464ee2cc"
+                           target="_blank" class="btn btn-buy">Where to buy</a>
+                     </li>
+                     <li>
+                        <a href="https://t.me/meridiannetwork" target="_blank">
+                           <svg width="29px" height="29px" viewBox="0 0 20 17" version="1.1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>telegram</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="telegram" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path
+                                       d="M7.84783668,11.204137 L7.5169954,15.9505125 C7.9903401,15.9505125 8.19534502,15.7431136 8.44118426,15.4940649 L10.6604042,13.330826 L15.258848,16.7656583 C16.1022016,17.2450559 16.6963825,16.9926072 16.923888,15.9743124 L19.9422938,1.54818669 L19.9431271,1.5473367 C20.2106336,0.275743248 19.492283,-0.221504191 18.6705966,0.0904442023 L0.928503845,7.01875852 C-0.282358566,7.49815605 -0.264024792,8.1866525 0.722665569,8.4986009 L5.25860783,9.93764349 L15.7946942,3.21332812 C16.2905394,2.87842984 16.7413836,3.06372889 16.3705413,3.39862716 L7.84783668,11.204137 Z"
+                                       id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://medium.com/@meridiannetwork" target="_blank">
+                           <!-- <img src="images/medium.svg" alt=""> -->
+                           <svg width="24px" height="19px" viewBox="0 0 20 15" version="1.1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>Path</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <path
+                                    d="M20,2.21054735 L19.2089844,2.21054735 C18.9153125,2.21054735 18.5,2.61192005 18.5,2.86881929 L18.5,12.1815836 C18.5,12.4387789 18.9153125,12.7894526 19.2089844,12.7894526 L20,12.7894526 L20,15 L12.8333594,15 L12.8333594,12.7894526 L14.3333594,12.7894526 L14.3333594,2.99997039 L14.2598437,2.99997039 L10.7570313,15 L8.04515625,15 L4.5875,2.99997039 L4.5,2.99997039 L4.5,12.7894526 L6,12.7894526 L6,15 L0,15 L0,12.7894526 L0.768359375,12.7894526 C1.0846875,12.7894526 1.5,12.4387789 1.5,12.1815836 L1.5,2.86874528 C1.5,2.61184603 1.0846875,2.21047334 0.768359375,2.21047334 L0,2.21047334 L0,0 L7.50265625,0 L9.9659375,8.68417157 L10.0339062,8.68417157 L12.5197656,0 L20,0 L20,2.21054735"
+                                    id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
+                              </g>
+                           </svg>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://twitter.com/networkmeridian" target="_blank">
+                           <!-- <img src="images/twitter.svg" alt=""> -->
+                           <svg width="32px" height="26px" viewBox="0 0 20 16" version="1.1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>twitter</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="twitter" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path
+                                       d="M19.6,1.885275 C18.871125,2.205 18.094475,2.416925 17.28475,2.519825 C18.11775,2.022475 18.753525,1.240925 19.052425,0.2989 C18.275775,0.76195 17.418275,1.089025 16.504425,1.27155 C15.766975,0.486325 14.715925,0 13.569325,0 C11.344725,0 9.553775,1.80565 9.553775,4.019225 C9.553775,4.337725 9.580725,4.643975 9.646875,4.935525 C6.3063,4.7726 3.350375,3.171525 1.36465,0.73255 C1.017975,1.334025 0.814625,2.022475 0.814625,2.7636 C0.814625,4.1552 1.53125,5.388775 2.59945,6.10295 C1.953875,6.0907 1.32055,5.903275 0.784,5.60805 C0.784,5.6203 0.784,5.636225 0.784,5.65215 C0.784,7.6048 2.176825,9.2267 4.0033,9.600325 C3.676225,9.68975 3.31975,9.732625 2.9498,9.732625 C2.69255,9.732625 2.43285,9.717925 2.189075,9.664025 C2.7097,11.2553 4.18705,12.425175 5.9437,12.46315 C4.5766,13.532575 2.840775,14.176925 0.961625,14.176925 C0.6321,14.176925 0.31605,14.162225 0,14.1218 C1.779925,15.269625 3.889375,15.925 6.1642,15.925 C13.5583,15.925 17.6008,9.8 17.6008,4.49085 C17.6008,4.313225 17.594675,4.141725 17.5861,3.97145 C18.383575,3.4055 19.05365,2.698675 19.6,1.885275 Z"
+                                       id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://github.com/cryptopinions3/meridian" target="_blank">
+                           <!-- <img src="images/Path.svg" alt=""> -->
+                           <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>Path</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="github-logo" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path
+                                       d="M18.6392711,4.99193622 C17.7459681,3.46136674 16.5342597,2.24961276 15.0038269,1.35640091 C13.4731663,0.463143508 11.8021412,0.0166287016 9.9895672,0.0166287016 C8.17722096,0.0166287016 6.5056492,0.463280182 4.97530752,1.35640091 C3.44473804,2.2495672 2.23307517,3.46136674 1.33977221,4.99193622 C0.446605923,6.52246014 0,8.1938041 0,10.0059226 C0,12.1826879 0.635079727,14.1400911 1.90555809,15.8786333 C3.17589977,17.6173121 4.81699317,18.82041 6.82870159,19.4880638 C7.06287016,19.5315262 7.23621868,19.5009567 7.34892938,19.3971298 C7.46168565,19.2931663 7.51799544,19.1629613 7.51799544,19.0070615 C7.51799544,18.9810478 7.5157631,18.7470159 7.51143508,18.3046925 C7.50697039,17.862369 7.50487472,17.476492 7.50487472,17.1472437 L7.20569476,17.1989977 C7.01494305,17.2339408 6.77430524,17.2487472 6.48378132,17.2445558 C6.19339408,17.2405011 5.89193622,17.2100683 5.57981777,17.1534852 C5.26756264,17.0974032 4.97712984,16.9673349 4.70829157,16.7635535 C4.43958998,16.5597722 4.24883827,16.2930296 4.136082,15.9637358 L4.00601367,15.6644191 C3.91931663,15.4651481 3.7828246,15.2437813 3.59635535,15.001139 C3.4098861,14.7582688 3.22132118,14.5936219 3.03056948,14.5069248 L2.93949886,14.4417312 C2.87881549,14.3984055 2.82250569,14.3461503 2.7704328,14.2855125 C2.71840547,14.2248747 2.6794533,14.1641913 2.65343964,14.1034169 C2.62738041,14.0425968 2.64897494,13.9927107 2.71845103,13.9535763 C2.78792711,13.9144419 2.91348519,13.8954442 3.09567198,13.8954442 L3.35571754,13.9343052 C3.52915718,13.9690661 3.74369021,14.0728929 3.99958998,14.2464237 C4.25535308,14.4198178 4.46560364,14.6452392 4.63038724,14.9225968 C4.82993166,15.2782232 5.07034169,15.5492027 5.35230068,15.735672 C5.63403189,15.9221412 5.91808656,16.0152164 6.20419134,16.0152164 C6.49029613,16.0152164 6.73740319,15.9935308 6.94560364,15.9503872 C7.15357631,15.9070159 7.34870159,15.8418223 7.53088838,15.7551708 C7.60892938,15.1739408 7.8214123,14.727426 8.1681549,14.4153075 C7.67394077,14.3633713 7.22961276,14.2851481 6.83494305,14.181139 C6.44050114,14.0769932 6.03289294,13.9079727 5.6123918,13.6736219 C5.19166287,13.43959 4.84264237,13.1489749 4.56523918,12.8022779 C4.28779043,12.4553986 4.06009112,12 3.88246014,11.436492 C3.70473804,10.8727563 3.61585421,10.2224601 3.61585421,9.48542141 C3.61585421,8.43599089 3.95845103,7.54296128 4.64350797,6.80583144 C4.32259681,6.01685649 4.35289294,5.1323918 4.73448747,4.15252847 C4.98596811,4.07439636 5.35890661,4.13302961 5.85312073,4.32806378 C6.34742597,4.52318907 6.70933941,4.69034169 6.93922551,4.82892938 C7.16911162,4.96747153 7.35330296,5.08487472 7.49207289,5.18009112 C8.29867882,4.95471526 9.13107062,4.84200456 9.98947608,4.84200456 C10.8478815,4.84200456 11.6804556,4.95471526 12.4871071,5.18009112 L12.9813667,4.86806378 C13.3193622,4.65986333 13.7184966,4.46906606 14.1778132,4.29562642 C14.6374032,4.1222779 14.9888383,4.07453303 15.231754,4.15266515 C15.6218223,5.13257403 15.6565831,6.01699317 15.3355809,6.80596811 C16.0205923,7.54309795 16.3633257,8.43635535 16.3633257,9.48555809 C16.3633257,10.2225968 16.274123,10.8749431 16.0966743,11.4430068 C15.9189977,12.0111617 15.6893394,12.4661048 15.4076082,12.8087927 C15.1255581,13.1514351 14.7743052,13.4397722 14.3538041,13.6737585 C13.9332118,13.9079271 13.525467,14.0769476 13.1310251,14.1810934 C12.7364009,14.2852392 12.2920729,14.363508 11.7978588,14.4155353 C12.2486105,14.8056036 12.4740319,15.4213212 12.4740319,16.2624146 L12.4740319,19.006697 C12.4740319,19.1625968 12.528246,19.2927563 12.6367654,19.3967654 C12.7451481,19.5005923 12.9163098,19.5311617 13.1504784,19.4876538 C15.1624601,18.8200911 16.8035535,17.6169476 18.0738497,15.8782688 C19.3440091,14.1397267 19.9793166,12.1823235 19.9793166,10.0055581 C19.978861,8.19366743 19.5320273,6.52246014 18.6392711,4.99193622 Z"
+                                       id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://discord.com/invite/VtWCdwk" target="_blank">
+                           <!-- <img src="images/discord.svg" alt=""> -->
+                           <svg width="32px" height="32px" viewBox="0 0 20 22" version="1.1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>discord</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="discord" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path
+                                       d="M2.34212766,19.2417589 L15.2864681,19.2417589 L14.6682553,17.2400567 L16.1470638,18.5091631 L17.5024113,19.7238014 L19.9716312,21.787234 L19.9716312,2.24680851 C19.9099007,1.03217021 18.8641135,0 17.567773,0 L2.34666667,0.00272340426 C1.05123404,0.00272340426 0,1.03670922 0,2.25134752 L0,16.9940426 C0,18.2749504 1.04941844,19.2417589 2.34212766,19.2417589 L2.34212766,19.2417589 Z M4.9901844,6.31103546 C6.6541844,5.10002837 8.19653901,5.15812766 8.19653901,5.15812766 L8.3209078,5.28068085 C6.28470922,5.76635461 5.36147518,6.67597163 5.36147518,6.67597163 C5.36147518,6.67597163 5.60839716,6.55523404 6.03960284,6.37095035 C8.78207092,5.29248227 11.7769078,5.37055319 14.5493333,6.73588652 C14.5493333,6.73588652 13.6242837,5.8852766 11.7133617,5.34059574 L11.8822128,5.17446809 C12.146383,5.17537589 13.5443972,5.22439716 15.0404539,6.31829787 C15.0404539,6.31829787 16.7144397,9.17787234 16.7144397,12.6910638 C16.6590638,12.6238865 15.6759149,14.203461 13.1458723,14.2579291 C13.1458723,14.2579291 12.7173901,13.7731631 12.4123688,13.3501277 C13.8920851,12.9252766 14.445844,12.0755745 14.445844,12.0755745 C13.9601702,12.3815035 13.5171631,12.5630638 13.1576738,12.7446241 C12.6048227,12.9879149 12.0510638,13.1077447 11.4982128,13.2302979 C8.88011348,13.6551489 7.41038298,12.9443404 6.02144681,12.3805957 L5.54666667,12.1391206 C5.54666667,12.1391206 6.09951773,12.9888227 7.52022695,13.4136738 C7.14712057,13.8394326 6.77764539,14.3232908 6.77764539,14.3232908 C4.24851064,14.2633759 3.3261844,12.6838014 3.3261844,12.6838014 C3.3261844,9.16516312 4.9901844,6.31103546 4.9901844,6.31103546 L4.9901844,6.31103546 Z"
+                                       id="Shape"></path>
+                                    <path
+                                       d="M12.0810213,11.5935319 C12.7264681,11.5935319 13.2520851,11.0488511 13.2520851,10.377078 C13.2520851,9.70984397 12.7291915,9.16516312 12.0810213,9.16516312 L12.0810213,9.16788652 C11.4382979,9.16788652 10.911773,9.71075177 10.9099574,10.3825248 C10.9099574,11.0488511 11.4355745,11.5935319 12.0810213,11.5935319 Z"
+                                       id="Path"></path>
+                                    <path
+                                       d="M7.88879433,11.5935319 C8.53424113,11.5935319 9.05985816,11.0488511 9.05985816,10.377078 C9.05985816,9.70984397 8.53787234,9.16516312 7.89242553,9.16516312 L7.88879433,9.16788652 C7.24334752,9.16788652 6.7177305,9.71075177 6.7177305,10.3825248 C6.7177305,11.0488511 7.24334752,11.5935319 7.88879433,11.5935319 L7.88879433,11.5935319 Z"
+                                       id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="clearfix">
+               </div>
             </div>
-          </div>
-          <div class="pull-right">
-            <ul>
-              <li>
-                <a href="https://t.me/meridiannetwork" target="_blank">
-                  <svg width="29px" height="29px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>telegram</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="telegram" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M7.84783668,11.204137 L7.5169954,15.9505125 C7.9903401,15.9505125 8.19534502,15.7431136 8.44118426,15.4940649 L10.6604042,13.330826 L15.258848,16.7656583 C16.1022016,17.2450559 16.6963825,16.9926072 16.923888,15.9743124 L19.9422938,1.54818669 L19.9431271,1.5473367 C20.2106336,0.275743248 19.492283,-0.221504191 18.6705966,0.0904442023 L0.928503845,7.01875852 C-0.282358566,7.49815605 -0.264024792,8.1866525 0.722665569,8.4986009 L5.25860783,9.93764349 L15.7946942,3.21332812 C16.2905394,2.87842984 16.7413836,3.06372889 16.3705413,3.39862716 L7.84783668,11.204137 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="https://medium.com/@meridiannetwork" target="_blank">
-                  <!-- <img src="images/medium.svg" alt=""> -->
-                  <svg width="24px" height="19px" viewBox="0 0 20 15" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>Path</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <path
-                        d="M20,2.21054735 L19.2089844,2.21054735 C18.9153125,2.21054735 18.5,2.61192005 18.5,2.86881929 L18.5,12.1815836 C18.5,12.4387789 18.9153125,12.7894526 19.2089844,12.7894526 L20,12.7894526 L20,15 L12.8333594,15 L12.8333594,12.7894526 L14.3333594,12.7894526 L14.3333594,2.99997039 L14.2598437,2.99997039 L10.7570313,15 L8.04515625,15 L4.5875,2.99997039 L4.5,2.99997039 L4.5,12.7894526 L6,12.7894526 L6,15 L0,15 L0,12.7894526 L0.768359375,12.7894526 C1.0846875,12.7894526 1.5,12.4387789 1.5,12.1815836 L1.5,2.86874528 C1.5,2.61184603 1.0846875,2.21047334 0.768359375,2.21047334 L0,2.21047334 L0,0 L7.50265625,0 L9.9659375,8.68417157 L10.0339062,8.68417157 L12.5197656,0 L20,0 L20,2.21054735"
-                        id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
-                    </g>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/networkmeridian" target="_blank">
-                  <!-- <img src="images/twitter.svg" alt=""> -->
-                  <svg width="32px" height="26px" viewBox="0 0 20 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>twitter</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="twitter" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M19.6,1.885275 C18.871125,2.205 18.094475,2.416925 17.28475,2.519825 C18.11775,2.022475 18.753525,1.240925 19.052425,0.2989 C18.275775,0.76195 17.418275,1.089025 16.504425,1.27155 C15.766975,0.486325 14.715925,0 13.569325,0 C11.344725,0 9.553775,1.80565 9.553775,4.019225 C9.553775,4.337725 9.580725,4.643975 9.646875,4.935525 C6.3063,4.7726 3.350375,3.171525 1.36465,0.73255 C1.017975,1.334025 0.814625,2.022475 0.814625,2.7636 C0.814625,4.1552 1.53125,5.388775 2.59945,6.10295 C1.953875,6.0907 1.32055,5.903275 0.784,5.60805 C0.784,5.6203 0.784,5.636225 0.784,5.65215 C0.784,7.6048 2.176825,9.2267 4.0033,9.600325 C3.676225,9.68975 3.31975,9.732625 2.9498,9.732625 C2.69255,9.732625 2.43285,9.717925 2.189075,9.664025 C2.7097,11.2553 4.18705,12.425175 5.9437,12.46315 C4.5766,13.532575 2.840775,14.176925 0.961625,14.176925 C0.6321,14.176925 0.31605,14.162225 0,14.1218 C1.779925,15.269625 3.889375,15.925 6.1642,15.925 C13.5583,15.925 17.6008,9.8 17.6008,4.49085 C17.6008,4.313225 17.594675,4.141725 17.5861,3.97145 C18.383575,3.4055 19.05365,2.698675 19.6,1.885275 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/cryptopinions3/meridian" target="_blank">
-                  <!-- <img src="images/Path.svg" alt=""> -->
-                  <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>Path</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="github-logo" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M18.6392711,4.99193622 C17.7459681,3.46136674 16.5342597,2.24961276 15.0038269,1.35640091 C13.4731663,0.463143508 11.8021412,0.0166287016 9.9895672,0.0166287016 C8.17722096,0.0166287016 6.5056492,0.463280182 4.97530752,1.35640091 C3.44473804,2.2495672 2.23307517,3.46136674 1.33977221,4.99193622 C0.446605923,6.52246014 0,8.1938041 0,10.0059226 C0,12.1826879 0.635079727,14.1400911 1.90555809,15.8786333 C3.17589977,17.6173121 4.81699317,18.82041 6.82870159,19.4880638 C7.06287016,19.5315262 7.23621868,19.5009567 7.34892938,19.3971298 C7.46168565,19.2931663 7.51799544,19.1629613 7.51799544,19.0070615 C7.51799544,18.9810478 7.5157631,18.7470159 7.51143508,18.3046925 C7.50697039,17.862369 7.50487472,17.476492 7.50487472,17.1472437 L7.20569476,17.1989977 C7.01494305,17.2339408 6.77430524,17.2487472 6.48378132,17.2445558 C6.19339408,17.2405011 5.89193622,17.2100683 5.57981777,17.1534852 C5.26756264,17.0974032 4.97712984,16.9673349 4.70829157,16.7635535 C4.43958998,16.5597722 4.24883827,16.2930296 4.136082,15.9637358 L4.00601367,15.6644191 C3.91931663,15.4651481 3.7828246,15.2437813 3.59635535,15.001139 C3.4098861,14.7582688 3.22132118,14.5936219 3.03056948,14.5069248 L2.93949886,14.4417312 C2.87881549,14.3984055 2.82250569,14.3461503 2.7704328,14.2855125 C2.71840547,14.2248747 2.6794533,14.1641913 2.65343964,14.1034169 C2.62738041,14.0425968 2.64897494,13.9927107 2.71845103,13.9535763 C2.78792711,13.9144419 2.91348519,13.8954442 3.09567198,13.8954442 L3.35571754,13.9343052 C3.52915718,13.9690661 3.74369021,14.0728929 3.99958998,14.2464237 C4.25535308,14.4198178 4.46560364,14.6452392 4.63038724,14.9225968 C4.82993166,15.2782232 5.07034169,15.5492027 5.35230068,15.735672 C5.63403189,15.9221412 5.91808656,16.0152164 6.20419134,16.0152164 C6.49029613,16.0152164 6.73740319,15.9935308 6.94560364,15.9503872 C7.15357631,15.9070159 7.34870159,15.8418223 7.53088838,15.7551708 C7.60892938,15.1739408 7.8214123,14.727426 8.1681549,14.4153075 C7.67394077,14.3633713 7.22961276,14.2851481 6.83494305,14.181139 C6.44050114,14.0769932 6.03289294,13.9079727 5.6123918,13.6736219 C5.19166287,13.43959 4.84264237,13.1489749 4.56523918,12.8022779 C4.28779043,12.4553986 4.06009112,12 3.88246014,11.436492 C3.70473804,10.8727563 3.61585421,10.2224601 3.61585421,9.48542141 C3.61585421,8.43599089 3.95845103,7.54296128 4.64350797,6.80583144 C4.32259681,6.01685649 4.35289294,5.1323918 4.73448747,4.15252847 C4.98596811,4.07439636 5.35890661,4.13302961 5.85312073,4.32806378 C6.34742597,4.52318907 6.70933941,4.69034169 6.93922551,4.82892938 C7.16911162,4.96747153 7.35330296,5.08487472 7.49207289,5.18009112 C8.29867882,4.95471526 9.13107062,4.84200456 9.98947608,4.84200456 C10.8478815,4.84200456 11.6804556,4.95471526 12.4871071,5.18009112 L12.9813667,4.86806378 C13.3193622,4.65986333 13.7184966,4.46906606 14.1778132,4.29562642 C14.6374032,4.1222779 14.9888383,4.07453303 15.231754,4.15266515 C15.6218223,5.13257403 15.6565831,6.01699317 15.3355809,6.80596811 C16.0205923,7.54309795 16.3633257,8.43635535 16.3633257,9.48555809 C16.3633257,10.2225968 16.274123,10.8749431 16.0966743,11.4430068 C15.9189977,12.0111617 15.6893394,12.4661048 15.4076082,12.8087927 C15.1255581,13.1514351 14.7743052,13.4397722 14.3538041,13.6737585 C13.9332118,13.9079271 13.525467,14.0769476 13.1310251,14.1810934 C12.7364009,14.2852392 12.2920729,14.363508 11.7978588,14.4155353 C12.2486105,14.8056036 12.4740319,15.4213212 12.4740319,16.2624146 L12.4740319,19.006697 C12.4740319,19.1625968 12.528246,19.2927563 12.6367654,19.3967654 C12.7451481,19.5005923 12.9163098,19.5311617 13.1504784,19.4876538 C15.1624601,18.8200911 16.8035535,17.6169476 18.0738497,15.8782688 C19.3440091,14.1397267 19.9793166,12.1823235 19.9793166,10.0055581 C19.978861,8.19366743 19.5320273,6.52246014 18.6392711,4.99193622 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="https://discord.com/invite/VtWCdwk" target="_blank">
-                  <!-- <img src="images/discord.svg" alt=""> -->
-                  <svg width="32px" height="32px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>discord</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="discord" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M2.34212766,19.2417589 L15.2864681,19.2417589 L14.6682553,17.2400567 L16.1470638,18.5091631 L17.5024113,19.7238014 L19.9716312,21.787234 L19.9716312,2.24680851 C19.9099007,1.03217021 18.8641135,0 17.567773,0 L2.34666667,0.00272340426 C1.05123404,0.00272340426 0,1.03670922 0,2.25134752 L0,16.9940426 C0,18.2749504 1.04941844,19.2417589 2.34212766,19.2417589 L2.34212766,19.2417589 Z M4.9901844,6.31103546 C6.6541844,5.10002837 8.19653901,5.15812766 8.19653901,5.15812766 L8.3209078,5.28068085 C6.28470922,5.76635461 5.36147518,6.67597163 5.36147518,6.67597163 C5.36147518,6.67597163 5.60839716,6.55523404 6.03960284,6.37095035 C8.78207092,5.29248227 11.7769078,5.37055319 14.5493333,6.73588652 C14.5493333,6.73588652 13.6242837,5.8852766 11.7133617,5.34059574 L11.8822128,5.17446809 C12.146383,5.17537589 13.5443972,5.22439716 15.0404539,6.31829787 C15.0404539,6.31829787 16.7144397,9.17787234 16.7144397,12.6910638 C16.6590638,12.6238865 15.6759149,14.203461 13.1458723,14.2579291 C13.1458723,14.2579291 12.7173901,13.7731631 12.4123688,13.3501277 C13.8920851,12.9252766 14.445844,12.0755745 14.445844,12.0755745 C13.9601702,12.3815035 13.5171631,12.5630638 13.1576738,12.7446241 C12.6048227,12.9879149 12.0510638,13.1077447 11.4982128,13.2302979 C8.88011348,13.6551489 7.41038298,12.9443404 6.02144681,12.3805957 L5.54666667,12.1391206 C5.54666667,12.1391206 6.09951773,12.9888227 7.52022695,13.4136738 C7.14712057,13.8394326 6.77764539,14.3232908 6.77764539,14.3232908 C4.24851064,14.2633759 3.3261844,12.6838014 3.3261844,12.6838014 C3.3261844,9.16516312 4.9901844,6.31103546 4.9901844,6.31103546 L4.9901844,6.31103546 Z"
-                          id="Shape"></path>
-                        <path
-                          d="M12.0810213,11.5935319 C12.7264681,11.5935319 13.2520851,11.0488511 13.2520851,10.377078 C13.2520851,9.70984397 12.7291915,9.16516312 12.0810213,9.16516312 L12.0810213,9.16788652 C11.4382979,9.16788652 10.911773,9.71075177 10.9099574,10.3825248 C10.9099574,11.0488511 11.4355745,11.5935319 12.0810213,11.5935319 Z"
-                          id="Path"></path>
-                        <path
-                          d="M7.88879433,11.5935319 C8.53424113,11.5935319 9.05985816,11.0488511 9.05985816,10.377078 C9.05985816,9.70984397 8.53787234,9.16516312 7.89242553,9.16516312 L7.88879433,9.16788652 C7.24334752,9.16788652 6.7177305,9.71075177 6.7177305,10.3825248 C6.7177305,11.0488511 7.24334752,11.5935319 7.88879433,11.5935319 L7.88879433,11.5935319 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="clearfix">
-          </div>
-        </div>
+            <!-- topbar -->
+            <div class="header-text">
+               <div class="row">
+                  <div class="col-md-7 col-sm-12">
+                     <h1 class="wow fadeInUp">
+                        Welcome to <br>Meridian Network
+                     </h1>
+                     <h3 class="wow fadeInUp" data-wow-delay="0.2s">Enabling DeFi through community governance</h3>
+                     <a href="https://app.uniswap.org/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&outputCurrency=0x896a07e3788983ec52eaf0f9c6f6e031464ee2cc"
+                        target="_blank" class="btn-to-buy visible-xs visible-sm">Where to buy</a>
+                     <p class="wow fadeInUp" data-wow-delay="0.4s">
+                        "Born as an alternative to current DeFi protocols, Meridian Network is set to become the first
+                        ecosystem of dapps/protocols to be community run, governed by its own users through a set of
+                        DAO-implemented mechanisms."
+                     </p>
+                     <h4 class="wow fadeInUp" data-wow-delay="0.5s"><a
+                           href="https://drive.google.com/file/d/1s26Tsiej7-wtJvY20jhPhygRoTrra3tC/view" target="_blank"
+                           class="readlitepaper"> Read litepaper <span class="fa fa-long-arrow-right"></span> </a></h4>
+                     <br>
+                  </div>
+
+                     <div class="header-img wow fadeInUp" data-wow-delay="0.6s">
+                        <img src="images/top-illustrationpng.png" class="right-illustration" alt="">
+                     </div>
+
+               </div>
+               <!-- row -->
+               <!-- coming-soon -->
+               <div class="coming-soon wow fadeInUp" data-wow-delay="0.7s">
+                  <h2>Swap your MRDN for LOCK</h2>
+                  <p>
+                     <a href="upgrade.html" class="btn btn-swap">SWAP NOW</a>
+                  </p>
+               </div>
+               <!-- coming-soon -->
+            </div>
+            <!-- header-text -->
+         </div>
+         <!-- container -->
+      </header>
+      <!-- header-->
+      <!-- first-dapp-->
+      <div class="first-dapp">
+         <div class="container">
+            <div class="line-sm-dark col-sm-offset-0 col-md-offset-0 "></div>
+            <h2 class="wow fadeInUp col-sm-offset-0 col-md-offset-0 " data-wow-delay="0.2s">Our first dapp, the <strong class="semibold">Meridian
+                  Vault</strong></h2>
+            <!-- only-mobile-->
+            <div class="stake_lock stake_lock-margin visible-xs  visible-sm">
+               <h1 class="col-sm-offset-0"><span>Stake LOCK </span> <span class="block"></span> Collect dividends</h1>
+               <h4 class="col-sm-offset-0">
+                  Stake LOCK to earn daily dividends up to our DAO balancer launch
+               </h4>
+               <p class="col-sm-offset-0 coming-btn">
+                  <a href="vault" class="btn btn-stake">STAKE NOW</a>
+               </p>
+            </div>
+            <!-- only-mobile-->
+            <!-- tablet -->
+            <div class="row visible-sm mt50">
+               <div class="col-sm-offset-0 col-sm-6">
+                  <div class="vault_box">
+                     <p>
+                        <img src="images/icon1.svg" alt="">
+                     </p>
+                     <h1>1</h1>
+                     <p>Stake your LOCK using this interface
+                        Get and reinvest 1% daily dividends
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+               </div>
+               <div class="col-sm-6">
+                  <div class="vault_box">
+                     <p>
+                        <img src="images/icon2.svg" alt="">
+                     </p>
+                     <h1>2</h1>
+                     <p>
+                        10% of tokens burned with each transaction between wallets
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+               </div>
+            </div>
+            <div class="row visible-sm">
+               <div class="col-sm-offset-3 col-sm-6">
+                  <div class="vault_box">
+                     <p>
+                        <img src="images/icon3.svg" alt="">
+                     </p>
+                     <h1>3</h1>
+                     <p>
+                        15% unstake penalty (10% burned and 5% redistributed to current stakers)
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+               </div>
+            </div>
+            <!-- tablet -->
+            <div class="row">
+               <div class="col-lg-3 col-md-3 hidden-sm">
+                  <div class="vault_box" data-wow-delay="0.4s">
+                     <p>
+                        <img src="images/icon1.svg" alt="">
+                     </p>
+                     <h1>1</h1>
+                     <p>Stake your LOCK using this interface <span class="block"></span>
+                        Get and reinvest 1% daily dividends
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+                  <!-- only-mobile-->
+                  <div class="vault_box vault_box_two visible-xs">
+                     <p>
+                        <img src="images/icon2.svg" alt="">
+                     </p>
+                     <h1>2</h1>
+                     <p>
+                        10% of tokens burned with each transaction between wallets
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+                  <!-- only-mobile-->
+                  <div class="vault_box" data-wow-delay="0.4s">
+                     <p>
+                        <img src="images/icon3.svg" alt="">
+                     </p>
+                     <h1>3</h1>
+                     <p>
+                        15% unstake penalty (10% burned and 5% redistributed to current stakers)
+                     </p>
+                  </div>
+                  <!-- vault_box -->
+               </div>
+               <!-- col -->
+               <div class="col-lg-9 col-md-9">
+                  <div class="second_vault hidden-xs hidden-sm">
+                     <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                           <div class="vault_box vault_box_two" data-wow-delay="0.2s">
+                              <p>
+                                 <img src="images/icon2.svg" alt="">
+                              </p>
+                              <h1>2</h1>
+                              <p>
+                                 10% of tokens burned with each transaction between wallets
+                              </p>
+                           </div>
+                           <!-- vault_box -->
+                        </div>
+                        <!-- col -->
+                        <div class="col-lg-8 col-md-8">
+                           <div class="stake_lock wow fadeInUp" data-wow-delay="0.6s">
+                              <h1><span>Stake LOCK </span> <span class="block"></span> Collect dividends</h1>
+                              <h4>
+                                 Stake LOCK to earn daily dividends up to <span class="block"></span> our DAO balancer
+                                 launch
+                              </h4>
+                              <p class="coming-btn">
+                                 <a href="vault" class="btn btn-stake">STAKE NOW</a>
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- row -->
+                  </div>
+                  <!--second_vault-->
+               </div>
+            </div>
+            <!-- row-->
+         </div>
       </div>
-    </header>
-
-    <section class="instruction">
-      <div class="container">
-        <div class="instruction_block wow fadeInUp" data-wow-delay="0.4s">
-          <div class="instruction_block-bg">
-            <img src="images/bg-instruction.png" alt="">
-          </div>
-          <h1 class="instruction_title instruction_green">Instructions</h1>
-          <ol>
-            <li>Press <span class="instruction_green">“Approve swap”</span> and submit the approval transaction</li>
-            <li>Once the transaction is confirmed, input the amount of <span class="instruction_green">MRDN</span></li>
-            <li>Press <span class="instruction_green">“Swap MRDN for LOCK”</span> to submit your token swap transaction
-            </li>
-          </ol>
-        </div>
-        <hr>
-        <div class="instruction_form wow fadeInUp" data-wow-delay="0.4s">
-          <div class="instruction_form-bg">
-            <img src="images/merdnicons.png" alt="">
-          </div>
-          <form action="">
-            <div class="form-row">
-              <button type="submit">APPROVE SWAP
-              </button>
-              <label for=""><input type="text">MRDN</label>
+      <!-- first-dapp -->
+      <!--roadmap-->
+      <div class="roadmap">
+         <div class="container">
+            <div class="token_economics">
+               <div class="white-line-sm"></div>
+               <h2 class="wow fadeInUp" data-wow-delay="0.2s">Token Economics</h2>
+               <div class="row">
+                  <div class="col-lg-offset-1 col-lg-10">
+                     <div class="pie_chart">
+                        <p class="wow fadeInDown" data-wow-delay="0.4s">
+                           <img src="images/piechart2.png" alt="">
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- row -->
             </div>
-            <div class="form-row">
-              <button type="submit">SWAP MRDN FOR LOCK
-              </button>
-              <label for=""><input type="text">LOCK</label>
+            <!-- token_economics -->
+            <div class="white-line-sm"></div>
+            <h2 class="wow fadeInUp" data-wow-delay="0.4s">Roadmap</h2>
+            <div class="full-box">
+               <div class="row">
+                  <div class="col-md-3 dot_line">
+                     <div class="caption-box firstDot">
+                        <h3>April 2020</h3>
+                        <p>Research begins <br>
+                           Focus shifted towards<br> balancer pools / DAO
+                        </p>
+                     </div>
+                  </div>
+                  <!-- col 3 -->
+                  <div class="col-md-5 dot_line">
+                     <div class="caption-box caption-box-empty secondDot">
+                     </div>
+                  </div>
+                  <!-- col 6 -->
+                  <div class="col-md-4 dot_line">
+                     <div class="caption-box thirdDot">
+                        <h3>June 2020</h3>
+                        <p>Project launch <br>
+                           Meridian Vault announcement <br> Meridian Vault testnet <br>
+                           Uniswap listing
+                        </p>
+                     </div>
+                  </div>
+                  <!-- col 3 -->
+               </div>
+               <!-- row -->
+               <div class="mind-box">
+                  <div class="row">
+                     <div class="col-md-3"></div>
+                     <div class="col-md-4">
+                        <div class="caption-box">
+                           <h3>May 2020</h3>
+                           <p>Decision to launch the Meridian<br> Vault as first protocol<br>
+                              Ongoing research into DAO/<br>DeFi protocols
+                           </p>
+                        </div>
+                     </div>
+                     <div class="col-md-4"></div>
+                     <div class="col-md-5">
+                        <div class="caption-box mt100 text-right julymap">
+                           <h3>July 2020</h3>
+                           <p>Litepaper release <br>
+                              2nd DeFI protocol announcement <br>
+                              Meridian Vault launch <br>
+                              Token swap <br>
+                              Third party audit <br>
+                              First Marketing stage
+                           </p>
+                        </div>
+                     </div>
+                     <div class="col-md-3"></div>
+                  </div>
+               </div>
+               <div class="row hidden-xs">
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>To be updated</h3>
+                        <p>Pending DAO approval</p>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>September 2020</h3>
+                        <p>Third DeFi protocol announcement <br>
+                           Second Marketing stage
+                        </p>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>August 2020</h3>
+                        <p>DAO balancer index fund launch <br>
+                           New exchange listing
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- mobile-->
+               <div class="row visible-xs">
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>August 2020</h3>
+                        <p>DAO balancer index fund launch<br>
+                           New exchange listing
+                        </p>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>September 2020</h3>
+                        <p>Third DeFi protocol announcement <br>
+                           Second Marketing stage
+                        </p>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="mt-darkcircle-section">
+                        <h3>To be updated</h3>
+                        <p>Pending DAO approval</p>
+                     </div>
+                  </div>
+               </div>
+               <!-- mobile-->
             </div>
-          </form>
-        </div>
+         </div>
+         <!--container -->
       </div>
-    </section>
+      <!--roadmap-->
+      <!-- faq-section -->
+      <div class="question-ans">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6 col-sm-12">
+                  <div class="line-sm-dark"></div>
+                  <h1 class="wow fadeInUp" data-wow-delay="0.2s">Have other questions ?</h1>
+                  <h2 class="wow fadeInDown" data-wow-delay="0.4s">Our team is available 24/7 <span
+                        class="block"></span>
+                     on all our channels</h2>
+                  <br />
+                  <div class="panel-group wow fadeInUp" data-wow-delay="0.6s" id="accordion" role="tablist"
+                     aria-multiselectable="true">
+                     <div class="panel">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                           <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                 aria-expanded="true" aria-controls="collapseOne">
+                                 How can you ensure the liquidity will <span class="block"></span>
+                                 remain in the Uniswap pool ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                           aria-labelledby="headingOne">
+                           <div class="panel-body">
+                              After launching the Meridian Vault, we will remove the liquidity from Uniswap, swap the
+                              remaining MRDN for LOCK, and re-add both ETH and LOCK at the ratio we initially removed
+                              them.
+                              After doing so, we will send the corresponding UNI-V2 tokens to the burn address, thereby
+                              ensuring we won’t be able to remove liquidity ever again.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="panel">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                                 aria-expanded="false" aria-controls="collapseTwo">
+                                 Who is the team ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingTwo">
+                           <div class="panel-body">
+                              Both co-founders are seasoned business owners and consultants in various industries
+                              (e-commerce, SaaS, etc). The core team consists of Cryptopinions as lead solidity
+                              developer,
+                              Ragnar as UI designer, two part-time front-end developers, and Che, our recently hired
+                              community manager.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                                 aria-expanded="false" aria-controls="collapseThree">
+                                 Why is the team anonymous ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingThree">
+                           <div class="panel-body">
+                              Initially the team decided not to disclose their identity as this was something not
+                              everyone
+                              was comfortable with. We did not see it as a priority. We have come to realize it is
+                              actually
+                              a topic of concern for some of our community members, and decided to re-evaluate our
+                              decision
+                              sometime between our Vault launch and our DAO balancer pool launch.
+                           </div>
+                        </div>
+                     </div>
+                     <!-- panel -->
+                     <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
+                                 aria-expanded="false" aria-controls="collapseFour">
+                                 What is Meridian Network
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingFour">
+                           <div class="panel-body">
+                              Born as an alternative to current DeFi protocols, Meridian Network is set to become the
+                              first
+                              ecosystem of dapps/protocols to be community run, governed by its own users through a set
+                              of
+                              DAO-implemented mechanisms.
+                           </div>
+                        </div>
+                     </div>
+                     <!-- panel -->
+                  </div>
+               </div>
+               <!-- col -->
+               <div class="col-lg-6  col-md-6 faqbg wow fadeInUp" data-wow-delay="0.4s">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                     <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive"
+                                 aria-expanded="false" aria-controls="collapseFive">
+                                 What is the difference between <span class="block"></span>
+                                 MRDN and LOCK ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingFive">
+                           <div class="panel-body">
+                              LOCK is an Erc-20 token just like MRDN. The dapps within the Meridian ecosystem will only
+                              be
+                              accessible to users holding LOCK. MRDN was meant as a temporary token and will have no use
+                              once LOCK goes live. The reason we upgraded from MRDN to LOCK was due to the fact that the
+                              MRDN smart contract lacked the functionality required for our future DeFi dapps.
+                              You can swap your MRDN for LOCK through the swap portal which is live on our website. You
+                              can
+                              also purchase LOCK from exchanges such as Uniswap and others to come.
 
+                           </div>
+                        </div>
+                     </div>
+                     <!-- panel -->
+                     <!-- <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingSix">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                              How can you ensure the liquidity will<span class="block"></span>
+                              remain in the Uniswap pool ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                           <div class="panel-body">
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque reiciendis omnis commodi iste, natus eum repudiandae, non placeat ex doloribus facere adipisci ab quo sapiente illo maxime eveniet quos ipsum?
+                           </div>
+                        </div>
+                     </div> -->
+                     <!-- panel -->
+                     <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingSeven">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"
+                                 aria-expanded="false" aria-controls="collapseSeven">
+                                 Will there be other exchanges ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingSeven">
+                           <div class="panel-body">
+                              Yes, we’re currently considering new exchange listings, and will be informing the
+                              community
+                              when we decide on one. We are aware that Hotbit listed MRDN. It was something they did
+                              without consulting us, we played no part in this.
 
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <p class="wow fadeInUp" data-wow-delay="0.1s">
-              <a href="index.html" class="hvr-sink"><img src="images/logo.png" class="footerlogo" alt=""></a>
-            </p>
-            <p class="wow fadeInDown" data-wow-delay="0.2s">
-              Enabling DeFi through community <span class="block"></span> governance
-            </p>
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <div class="footer-right wow fadeInDown" data-wow-delay="0.4s">
-              <p class="social-link">
-                Follow us
-                <a href="https://t.me/meridiannetwork" target="_blank">
-                  <!-- <img src="images/telegram_color.svg" alt=""> -->
-                  <svg width="29px" height="29px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>telegram</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="telegram" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M7.84783668,11.204137 L7.5169954,15.9505125 C7.9903401,15.9505125 8.19534502,15.7431136 8.44118426,15.4940649 L10.6604042,13.330826 L15.258848,16.7656583 C16.1022016,17.2450559 16.6963825,16.9926072 16.923888,15.9743124 L19.9422938,1.54818669 L19.9431271,1.5473367 C20.2106336,0.275743248 19.492283,-0.221504191 18.6705966,0.0904442023 L0.928503845,7.01875852 C-0.282358566,7.49815605 -0.264024792,8.1866525 0.722665569,8.4986009 L5.25860783,9.93764349 L15.7946942,3.21332812 C16.2905394,2.87842984 16.7413836,3.06372889 16.3705413,3.39862716 L7.84783668,11.204137 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-                <a href="https://medium.com/@meridiannetwork" target="_blank">
-                  <!-- <img src="images/medium_color.svg" alt=""> -->
-                  <svg width="24px" height="19px" viewBox="0 0 20 15" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>Path</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <path
-                        d="M20,2.21054735 L19.2089844,2.21054735 C18.9153125,2.21054735 18.5,2.61192005 18.5,2.86881929 L18.5,12.1815836 C18.5,12.4387789 18.9153125,12.7894526 19.2089844,12.7894526 L20,12.7894526 L20,15 L12.8333594,15 L12.8333594,12.7894526 L14.3333594,12.7894526 L14.3333594,2.99997039 L14.2598437,2.99997039 L10.7570313,15 L8.04515625,15 L4.5875,2.99997039 L4.5,2.99997039 L4.5,12.7894526 L6,12.7894526 L6,15 L0,15 L0,12.7894526 L0.768359375,12.7894526 C1.0846875,12.7894526 1.5,12.4387789 1.5,12.1815836 L1.5,2.86874528 C1.5,2.61184603 1.0846875,2.21047334 0.768359375,2.21047334 L0,2.21047334 L0,0 L7.50265625,0 L9.9659375,8.68417157 L10.0339062,8.68417157 L12.5197656,0 L20,0 L20,2.21054735"
-                        id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
-                    </g>
-                  </svg>
-                </a>
-                <a href="https://twitter.com/networkmeridian" target="_blank">
-                  <!-- <img src="images/twitter_color.svg" alt=""> -->
-                  <svg width="32px" height="26px" viewBox="0 0 20 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>twitter</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="twitter" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M19.6,1.885275 C18.871125,2.205 18.094475,2.416925 17.28475,2.519825 C18.11775,2.022475 18.753525,1.240925 19.052425,0.2989 C18.275775,0.76195 17.418275,1.089025 16.504425,1.27155 C15.766975,0.486325 14.715925,0 13.569325,0 C11.344725,0 9.553775,1.80565 9.553775,4.019225 C9.553775,4.337725 9.580725,4.643975 9.646875,4.935525 C6.3063,4.7726 3.350375,3.171525 1.36465,0.73255 C1.017975,1.334025 0.814625,2.022475 0.814625,2.7636 C0.814625,4.1552 1.53125,5.388775 2.59945,6.10295 C1.953875,6.0907 1.32055,5.903275 0.784,5.60805 C0.784,5.6203 0.784,5.636225 0.784,5.65215 C0.784,7.6048 2.176825,9.2267 4.0033,9.600325 C3.676225,9.68975 3.31975,9.732625 2.9498,9.732625 C2.69255,9.732625 2.43285,9.717925 2.189075,9.664025 C2.7097,11.2553 4.18705,12.425175 5.9437,12.46315 C4.5766,13.532575 2.840775,14.176925 0.961625,14.176925 C0.6321,14.176925 0.31605,14.162225 0,14.1218 C1.779925,15.269625 3.889375,15.925 6.1642,15.925 C13.5583,15.925 17.6008,9.8 17.6008,4.49085 C17.6008,4.313225 17.594675,4.141725 17.5861,3.97145 C18.383575,3.4055 19.05365,2.698675 19.6,1.885275 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-                <a href="https://github.com/cryptopinions3/meridian" target="_blank">
-                  <!-- <img src="images/github-logo_color.svg" alt=""> -->
-                  <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>Path</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="github-logo" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M18.6392711,4.99193622 C17.7459681,3.46136674 16.5342597,2.24961276 15.0038269,1.35640091 C13.4731663,0.463143508 11.8021412,0.0166287016 9.9895672,0.0166287016 C8.17722096,0.0166287016 6.5056492,0.463280182 4.97530752,1.35640091 C3.44473804,2.2495672 2.23307517,3.46136674 1.33977221,4.99193622 C0.446605923,6.52246014 0,8.1938041 0,10.0059226 C0,12.1826879 0.635079727,14.1400911 1.90555809,15.8786333 C3.17589977,17.6173121 4.81699317,18.82041 6.82870159,19.4880638 C7.06287016,19.5315262 7.23621868,19.5009567 7.34892938,19.3971298 C7.46168565,19.2931663 7.51799544,19.1629613 7.51799544,19.0070615 C7.51799544,18.9810478 7.5157631,18.7470159 7.51143508,18.3046925 C7.50697039,17.862369 7.50487472,17.476492 7.50487472,17.1472437 L7.20569476,17.1989977 C7.01494305,17.2339408 6.77430524,17.2487472 6.48378132,17.2445558 C6.19339408,17.2405011 5.89193622,17.2100683 5.57981777,17.1534852 C5.26756264,17.0974032 4.97712984,16.9673349 4.70829157,16.7635535 C4.43958998,16.5597722 4.24883827,16.2930296 4.136082,15.9637358 L4.00601367,15.6644191 C3.91931663,15.4651481 3.7828246,15.2437813 3.59635535,15.001139 C3.4098861,14.7582688 3.22132118,14.5936219 3.03056948,14.5069248 L2.93949886,14.4417312 C2.87881549,14.3984055 2.82250569,14.3461503 2.7704328,14.2855125 C2.71840547,14.2248747 2.6794533,14.1641913 2.65343964,14.1034169 C2.62738041,14.0425968 2.64897494,13.9927107 2.71845103,13.9535763 C2.78792711,13.9144419 2.91348519,13.8954442 3.09567198,13.8954442 L3.35571754,13.9343052 C3.52915718,13.9690661 3.74369021,14.0728929 3.99958998,14.2464237 C4.25535308,14.4198178 4.46560364,14.6452392 4.63038724,14.9225968 C4.82993166,15.2782232 5.07034169,15.5492027 5.35230068,15.735672 C5.63403189,15.9221412 5.91808656,16.0152164 6.20419134,16.0152164 C6.49029613,16.0152164 6.73740319,15.9935308 6.94560364,15.9503872 C7.15357631,15.9070159 7.34870159,15.8418223 7.53088838,15.7551708 C7.60892938,15.1739408 7.8214123,14.727426 8.1681549,14.4153075 C7.67394077,14.3633713 7.22961276,14.2851481 6.83494305,14.181139 C6.44050114,14.0769932 6.03289294,13.9079727 5.6123918,13.6736219 C5.19166287,13.43959 4.84264237,13.1489749 4.56523918,12.8022779 C4.28779043,12.4553986 4.06009112,12 3.88246014,11.436492 C3.70473804,10.8727563 3.61585421,10.2224601 3.61585421,9.48542141 C3.61585421,8.43599089 3.95845103,7.54296128 4.64350797,6.80583144 C4.32259681,6.01685649 4.35289294,5.1323918 4.73448747,4.15252847 C4.98596811,4.07439636 5.35890661,4.13302961 5.85312073,4.32806378 C6.34742597,4.52318907 6.70933941,4.69034169 6.93922551,4.82892938 C7.16911162,4.96747153 7.35330296,5.08487472 7.49207289,5.18009112 C8.29867882,4.95471526 9.13107062,4.84200456 9.98947608,4.84200456 C10.8478815,4.84200456 11.6804556,4.95471526 12.4871071,5.18009112 L12.9813667,4.86806378 C13.3193622,4.65986333 13.7184966,4.46906606 14.1778132,4.29562642 C14.6374032,4.1222779 14.9888383,4.07453303 15.231754,4.15266515 C15.6218223,5.13257403 15.6565831,6.01699317 15.3355809,6.80596811 C16.0205923,7.54309795 16.3633257,8.43635535 16.3633257,9.48555809 C16.3633257,10.2225968 16.274123,10.8749431 16.0966743,11.4430068 C15.9189977,12.0111617 15.6893394,12.4661048 15.4076082,12.8087927 C15.1255581,13.1514351 14.7743052,13.4397722 14.3538041,13.6737585 C13.9332118,13.9079271 13.525467,14.0769476 13.1310251,14.1810934 C12.7364009,14.2852392 12.2920729,14.363508 11.7978588,14.4155353 C12.2486105,14.8056036 12.4740319,15.4213212 12.4740319,16.2624146 L12.4740319,19.006697 C12.4740319,19.1625968 12.528246,19.2927563 12.6367654,19.3967654 C12.7451481,19.5005923 12.9163098,19.5311617 13.1504784,19.4876538 C15.1624601,18.8200911 16.8035535,17.6169476 18.0738497,15.8782688 C19.3440091,14.1397267 19.9793166,12.1823235 19.9793166,10.0055581 C19.978861,8.19366743 19.5320273,6.52246014 18.6392711,4.99193622 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-                <a href="https://discord.com/invite/VtWCdwk" target="_blank">
-                  <!-- <img src="images/discord_color.svg" alt=""> -->
-                  <svg width="32px" height="32px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-                    <title>discord</title>
-                    <desc>Created with Sketch.</desc>
-                    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="discord" fill="#FFFFFF" fill-rule="nonzero">
-                        <path
-                          d="M2.34212766,19.2417589 L15.2864681,19.2417589 L14.6682553,17.2400567 L16.1470638,18.5091631 L17.5024113,19.7238014 L19.9716312,21.787234 L19.9716312,2.24680851 C19.9099007,1.03217021 18.8641135,0 17.567773,0 L2.34666667,0.00272340426 C1.05123404,0.00272340426 0,1.03670922 0,2.25134752 L0,16.9940426 C0,18.2749504 1.04941844,19.2417589 2.34212766,19.2417589 L2.34212766,19.2417589 Z M4.9901844,6.31103546 C6.6541844,5.10002837 8.19653901,5.15812766 8.19653901,5.15812766 L8.3209078,5.28068085 C6.28470922,5.76635461 5.36147518,6.67597163 5.36147518,6.67597163 C5.36147518,6.67597163 5.60839716,6.55523404 6.03960284,6.37095035 C8.78207092,5.29248227 11.7769078,5.37055319 14.5493333,6.73588652 C14.5493333,6.73588652 13.6242837,5.8852766 11.7133617,5.34059574 L11.8822128,5.17446809 C12.146383,5.17537589 13.5443972,5.22439716 15.0404539,6.31829787 C15.0404539,6.31829787 16.7144397,9.17787234 16.7144397,12.6910638 C16.6590638,12.6238865 15.6759149,14.203461 13.1458723,14.2579291 C13.1458723,14.2579291 12.7173901,13.7731631 12.4123688,13.3501277 C13.8920851,12.9252766 14.445844,12.0755745 14.445844,12.0755745 C13.9601702,12.3815035 13.5171631,12.5630638 13.1576738,12.7446241 C12.6048227,12.9879149 12.0510638,13.1077447 11.4982128,13.2302979 C8.88011348,13.6551489 7.41038298,12.9443404 6.02144681,12.3805957 L5.54666667,12.1391206 C5.54666667,12.1391206 6.09951773,12.9888227 7.52022695,13.4136738 C7.14712057,13.8394326 6.77764539,14.3232908 6.77764539,14.3232908 C4.24851064,14.2633759 3.3261844,12.6838014 3.3261844,12.6838014 C3.3261844,9.16516312 4.9901844,6.31103546 4.9901844,6.31103546 L4.9901844,6.31103546 Z"
-                          id="Shape"></path>
-                        <path
-                          d="M12.0810213,11.5935319 C12.7264681,11.5935319 13.2520851,11.0488511 13.2520851,10.377078 C13.2520851,9.70984397 12.7291915,9.16516312 12.0810213,9.16516312 L12.0810213,9.16788652 C11.4382979,9.16788652 10.911773,9.71075177 10.9099574,10.3825248 C10.9099574,11.0488511 11.4355745,11.5935319 12.0810213,11.5935319 Z"
-                          id="Path"></path>
-                        <path
-                          d="M7.88879433,11.5935319 C8.53424113,11.5935319 9.05985816,11.0488511 9.05985816,10.377078 C9.05985816,9.70984397 8.53787234,9.16516312 7.89242553,9.16516312 L7.88879433,9.16788652 C7.24334752,9.16788652 6.7177305,9.71075177 6.7177305,10.3825248 C6.7177305,11.0488511 7.24334752,11.5935319 7.88879433,11.5935319 L7.88879433,11.5935319 Z"
-                          id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- panel -->
+                     <div class="panel ">
+                        <div class="panel-heading" role="tab" id="headingEight">
+                           <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight"
+                                 aria-expanded="false" aria-controls="collapseEight">
+                                 What is the value of LOCK ?
+                              </a>
+                           </h4>
+                        </div>
+                        <div id="collapseEight" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingEight">
+                           <div class="panel-body">
+                              LOCK's value will derive from the many financial dapps we plan on creating in the future,
+                              of
+                              which the DAO balancer pool is the first one ( the Vault is actually the first one but
+                              that
+                              one is not a permanent dapp ). LOCK will be central to these decentralized applications
+                              and
+                              its use will increase with each new one
+                           </div>
+                        </div>
+                     </div>
+                     <!-- panel -->
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
-        <!-- row -->
+            <!-- row -->
+         </div>
+      </div>
+      <!-- faq-section -->
+      <!-- footer -->
+      <div class="footer">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-offset-1 col-lg-4 col-md-6">
+                  <p class="wow fadeInUp" data-wow-delay="0.1s">
+                     <a href="" class="hvr-sink"><img src="images/logo.png" class="footerlogo" alt=""></a>
+                  </p>
+                  <p class="wow fadeInDown" data-wow-delay="0.2s">
+                     Enabling DeFi through community <span class="block"></span> governance
+                  </p>
+               </div>
+               <div class="col-lg-6 col-md-6">
+                  <div class="footer-right wow fadeInDown" data-wow-delay="0.4s">
+                     <p>
+                        <a href="/info.html">
+                           Please read Disclaimer
+                        </a>
+                     </p>
+                     <p class="social-link">
+                        Follow us
+                        <a href="https://t.me/meridiannetwork" target="_blank">
+                           <!-- <img src="images/telegram_color.svg" alt=""> -->
+                           <svg width="29px" height="29px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>telegram</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="telegram" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M7.84783668,11.204137 L7.5169954,15.9505125 C7.9903401,15.9505125 8.19534502,15.7431136 8.44118426,15.4940649 L10.6604042,13.330826 L15.258848,16.7656583 C16.1022016,17.2450559 16.6963825,16.9926072 16.923888,15.9743124 L19.9422938,1.54818669 L19.9431271,1.5473367 C20.2106336,0.275743248 19.492283,-0.221504191 18.6705966,0.0904442023 L0.928503845,7.01875852 C-0.282358566,7.49815605 -0.264024792,8.1866525 0.722665569,8.4986009 L5.25860783,9.93764349 L15.7946942,3.21332812 C16.2905394,2.87842984 16.7413836,3.06372889 16.3705413,3.39862716 L7.84783668,11.204137 Z" id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                        <a href="https://medium.com/@meridiannetwork" target="_blank">
+                           <!-- <img src="images/medium_color.svg" alt=""> -->
+                           <svg width="24px" height="19px" viewBox="0 0 20 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>Path</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <path d="M20,2.21054735 L19.2089844,2.21054735 C18.9153125,2.21054735 18.5,2.61192005 18.5,2.86881929 L18.5,12.1815836 C18.5,12.4387789 18.9153125,12.7894526 19.2089844,12.7894526 L20,12.7894526 L20,15 L12.8333594,15 L12.8333594,12.7894526 L14.3333594,12.7894526 L14.3333594,2.99997039 L14.2598437,2.99997039 L10.7570313,15 L8.04515625,15 L4.5875,2.99997039 L4.5,2.99997039 L4.5,12.7894526 L6,12.7894526 L6,15 L0,15 L0,12.7894526 L0.768359375,12.7894526 C1.0846875,12.7894526 1.5,12.4387789 1.5,12.1815836 L1.5,2.86874528 C1.5,2.61184603 1.0846875,2.21047334 0.768359375,2.21047334 L0,2.21047334 L0,0 L7.50265625,0 L9.9659375,8.68417157 L10.0339062,8.68417157 L12.5197656,0 L20,0 L20,2.21054735" id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
+                              </g>
+                           </svg>
+                        </a>
+                        <a href="https://twitter.com/networkmeridian" target="_blank">
+                           <!-- <img src="images/twitter_color.svg" alt=""> -->
+                           <svg width="32px" height="26px" viewBox="0 0 20 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>twitter</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="twitter" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M19.6,1.885275 C18.871125,2.205 18.094475,2.416925 17.28475,2.519825 C18.11775,2.022475 18.753525,1.240925 19.052425,0.2989 C18.275775,0.76195 17.418275,1.089025 16.504425,1.27155 C15.766975,0.486325 14.715925,0 13.569325,0 C11.344725,0 9.553775,1.80565 9.553775,4.019225 C9.553775,4.337725 9.580725,4.643975 9.646875,4.935525 C6.3063,4.7726 3.350375,3.171525 1.36465,0.73255 C1.017975,1.334025 0.814625,2.022475 0.814625,2.7636 C0.814625,4.1552 1.53125,5.388775 2.59945,6.10295 C1.953875,6.0907 1.32055,5.903275 0.784,5.60805 C0.784,5.6203 0.784,5.636225 0.784,5.65215 C0.784,7.6048 2.176825,9.2267 4.0033,9.600325 C3.676225,9.68975 3.31975,9.732625 2.9498,9.732625 C2.69255,9.732625 2.43285,9.717925 2.189075,9.664025 C2.7097,11.2553 4.18705,12.425175 5.9437,12.46315 C4.5766,13.532575 2.840775,14.176925 0.961625,14.176925 C0.6321,14.176925 0.31605,14.162225 0,14.1218 C1.779925,15.269625 3.889375,15.925 6.1642,15.925 C13.5583,15.925 17.6008,9.8 17.6008,4.49085 C17.6008,4.313225 17.594675,4.141725 17.5861,3.97145 C18.383575,3.4055 19.05365,2.698675 19.6,1.885275 Z" id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                        <a href="https://github.com/cryptopinions3/meridian" target="_blank">
+                           <!-- <img src="images/github-logo_color.svg" alt=""> -->
+                           <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>Path</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="github-logo" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M18.6392711,4.99193622 C17.7459681,3.46136674 16.5342597,2.24961276 15.0038269,1.35640091 C13.4731663,0.463143508 11.8021412,0.0166287016 9.9895672,0.0166287016 C8.17722096,0.0166287016 6.5056492,0.463280182 4.97530752,1.35640091 C3.44473804,2.2495672 2.23307517,3.46136674 1.33977221,4.99193622 C0.446605923,6.52246014 0,8.1938041 0,10.0059226 C0,12.1826879 0.635079727,14.1400911 1.90555809,15.8786333 C3.17589977,17.6173121 4.81699317,18.82041 6.82870159,19.4880638 C7.06287016,19.5315262 7.23621868,19.5009567 7.34892938,19.3971298 C7.46168565,19.2931663 7.51799544,19.1629613 7.51799544,19.0070615 C7.51799544,18.9810478 7.5157631,18.7470159 7.51143508,18.3046925 C7.50697039,17.862369 7.50487472,17.476492 7.50487472,17.1472437 L7.20569476,17.1989977 C7.01494305,17.2339408 6.77430524,17.2487472 6.48378132,17.2445558 C6.19339408,17.2405011 5.89193622,17.2100683 5.57981777,17.1534852 C5.26756264,17.0974032 4.97712984,16.9673349 4.70829157,16.7635535 C4.43958998,16.5597722 4.24883827,16.2930296 4.136082,15.9637358 L4.00601367,15.6644191 C3.91931663,15.4651481 3.7828246,15.2437813 3.59635535,15.001139 C3.4098861,14.7582688 3.22132118,14.5936219 3.03056948,14.5069248 L2.93949886,14.4417312 C2.87881549,14.3984055 2.82250569,14.3461503 2.7704328,14.2855125 C2.71840547,14.2248747 2.6794533,14.1641913 2.65343964,14.1034169 C2.62738041,14.0425968 2.64897494,13.9927107 2.71845103,13.9535763 C2.78792711,13.9144419 2.91348519,13.8954442 3.09567198,13.8954442 L3.35571754,13.9343052 C3.52915718,13.9690661 3.74369021,14.0728929 3.99958998,14.2464237 C4.25535308,14.4198178 4.46560364,14.6452392 4.63038724,14.9225968 C4.82993166,15.2782232 5.07034169,15.5492027 5.35230068,15.735672 C5.63403189,15.9221412 5.91808656,16.0152164 6.20419134,16.0152164 C6.49029613,16.0152164 6.73740319,15.9935308 6.94560364,15.9503872 C7.15357631,15.9070159 7.34870159,15.8418223 7.53088838,15.7551708 C7.60892938,15.1739408 7.8214123,14.727426 8.1681549,14.4153075 C7.67394077,14.3633713 7.22961276,14.2851481 6.83494305,14.181139 C6.44050114,14.0769932 6.03289294,13.9079727 5.6123918,13.6736219 C5.19166287,13.43959 4.84264237,13.1489749 4.56523918,12.8022779 C4.28779043,12.4553986 4.06009112,12 3.88246014,11.436492 C3.70473804,10.8727563 3.61585421,10.2224601 3.61585421,9.48542141 C3.61585421,8.43599089 3.95845103,7.54296128 4.64350797,6.80583144 C4.32259681,6.01685649 4.35289294,5.1323918 4.73448747,4.15252847 C4.98596811,4.07439636 5.35890661,4.13302961 5.85312073,4.32806378 C6.34742597,4.52318907 6.70933941,4.69034169 6.93922551,4.82892938 C7.16911162,4.96747153 7.35330296,5.08487472 7.49207289,5.18009112 C8.29867882,4.95471526 9.13107062,4.84200456 9.98947608,4.84200456 C10.8478815,4.84200456 11.6804556,4.95471526 12.4871071,5.18009112 L12.9813667,4.86806378 C13.3193622,4.65986333 13.7184966,4.46906606 14.1778132,4.29562642 C14.6374032,4.1222779 14.9888383,4.07453303 15.231754,4.15266515 C15.6218223,5.13257403 15.6565831,6.01699317 15.3355809,6.80596811 C16.0205923,7.54309795 16.3633257,8.43635535 16.3633257,9.48555809 C16.3633257,10.2225968 16.274123,10.8749431 16.0966743,11.4430068 C15.9189977,12.0111617 15.6893394,12.4661048 15.4076082,12.8087927 C15.1255581,13.1514351 14.7743052,13.4397722 14.3538041,13.6737585 C13.9332118,13.9079271 13.525467,14.0769476 13.1310251,14.1810934 C12.7364009,14.2852392 12.2920729,14.363508 11.7978588,14.4155353 C12.2486105,14.8056036 12.4740319,15.4213212 12.4740319,16.2624146 L12.4740319,19.006697 C12.4740319,19.1625968 12.528246,19.2927563 12.6367654,19.3967654 C12.7451481,19.5005923 12.9163098,19.5311617 13.1504784,19.4876538 C15.1624601,18.8200911 16.8035535,17.6169476 18.0738497,15.8782688 C19.3440091,14.1397267 19.9793166,12.1823235 19.9793166,10.0055581 C19.978861,8.19366743 19.5320273,6.52246014 18.6392711,4.99193622 Z" id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                        <a href="https://discord.com/invite/VtWCdwk" target="_blank">
+                           <!-- <img src="images/discord_color.svg" alt=""> -->
+                           <svg width="32px" height="32px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                              <title>discord</title>
+                              <desc>Created with Sketch.</desc>
+                              <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g id="discord" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M2.34212766,19.2417589 L15.2864681,19.2417589 L14.6682553,17.2400567 L16.1470638,18.5091631 L17.5024113,19.7238014 L19.9716312,21.787234 L19.9716312,2.24680851 C19.9099007,1.03217021 18.8641135,0 17.567773,0 L2.34666667,0.00272340426 C1.05123404,0.00272340426 0,1.03670922 0,2.25134752 L0,16.9940426 C0,18.2749504 1.04941844,19.2417589 2.34212766,19.2417589 L2.34212766,19.2417589 Z M4.9901844,6.31103546 C6.6541844,5.10002837 8.19653901,5.15812766 8.19653901,5.15812766 L8.3209078,5.28068085 C6.28470922,5.76635461 5.36147518,6.67597163 5.36147518,6.67597163 C5.36147518,6.67597163 5.60839716,6.55523404 6.03960284,6.37095035 C8.78207092,5.29248227 11.7769078,5.37055319 14.5493333,6.73588652 C14.5493333,6.73588652 13.6242837,5.8852766 11.7133617,5.34059574 L11.8822128,5.17446809 C12.146383,5.17537589 13.5443972,5.22439716 15.0404539,6.31829787 C15.0404539,6.31829787 16.7144397,9.17787234 16.7144397,12.6910638 C16.6590638,12.6238865 15.6759149,14.203461 13.1458723,14.2579291 C13.1458723,14.2579291 12.7173901,13.7731631 12.4123688,13.3501277 C13.8920851,12.9252766 14.445844,12.0755745 14.445844,12.0755745 C13.9601702,12.3815035 13.5171631,12.5630638 13.1576738,12.7446241 C12.6048227,12.9879149 12.0510638,13.1077447 11.4982128,13.2302979 C8.88011348,13.6551489 7.41038298,12.9443404 6.02144681,12.3805957 L5.54666667,12.1391206 C5.54666667,12.1391206 6.09951773,12.9888227 7.52022695,13.4136738 C7.14712057,13.8394326 6.77764539,14.3232908 6.77764539,14.3232908 C4.24851064,14.2633759 3.3261844,12.6838014 3.3261844,12.6838014 C3.3261844,9.16516312 4.9901844,6.31103546 4.9901844,6.31103546 L4.9901844,6.31103546 Z" id="Shape"></path>
+                                    <path d="M12.0810213,11.5935319 C12.7264681,11.5935319 13.2520851,11.0488511 13.2520851,10.377078 C13.2520851,9.70984397 12.7291915,9.16516312 12.0810213,9.16516312 L12.0810213,9.16788652 C11.4382979,9.16788652 10.911773,9.71075177 10.9099574,10.3825248 C10.9099574,11.0488511 11.4355745,11.5935319 12.0810213,11.5935319 Z" id="Path"></path>
+                                    <path d="M7.88879433,11.5935319 C8.53424113,11.5935319 9.05985816,11.0488511 9.05985816,10.377078 C9.05985816,9.70984397 8.53787234,9.16516312 7.89242553,9.16516312 L7.88879433,9.16788652 C7.24334752,9.16788652 6.7177305,9.71075177 6.7177305,10.3825248 C6.7177305,11.0488511 7.24334752,11.5935319 7.88879433,11.5935319 L7.88879433,11.5935319 Z" id="Path"></path>
+                                 </g>
+                              </g>
+                           </svg>
+                        </a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- row -->
+         </div>
       </div>
       <!-- footer -->
       <div class="preloader">
-        <span class="spinner spinner-round load-done">
-        </span>
-      </div>
-    </div>
-  </div>
+         <span class="spinner spinner-round load-done">
 
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/custom.js"></script>
-  <script type="text/javascript" src="js/wow.js"></script>
+         </span>
+      </div>
+   </div>
+
+   <script type="text/javascript" src="js/jquery.js"></script>
+   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="js/custom.js"></script>
+   <script type="text/javascript" src="js/wow.js"></script>
 </body>
 
 </html>
