@@ -16,7 +16,7 @@ contract DeployMeridian{
   constructor() public{
     m = new Meridian();
     s = new MeridianStaking(address(m));
-    u = new MeridianUpgrade(m.previousToken(),address(this));
+    u = new MeridianUpgrade(m.previousToken(),address(m));
     m.addBurnExempt(address(s));
     m.addBurnExempt(address(u));
     m.addBurnExempt(msg.sender);
