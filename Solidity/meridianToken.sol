@@ -26,7 +26,7 @@ contract Meridian is ERC20, Ownable {
   uint256 public TOKEN_BURN_RATE = 100; //represents 10%, shows 100 so that it may be adjusted to decimal precision
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
   uint256 LOCKED_AMOUNT=500000 * (10 ** 18);
-  uint256 unlockTime=now + 62 days;
+  uint256 unlockTime=now + 40 days;
 
   constructor() public Ownable(){
     balances[address(this)] = LOCKED_AMOUNT;
