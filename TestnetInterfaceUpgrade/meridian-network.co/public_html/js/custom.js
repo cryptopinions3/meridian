@@ -1,5 +1,5 @@
 $(document).ready(function() {
-        //new WOW().init();
+        new WOW().init();
 });
 
 $.fn.exists = function (){

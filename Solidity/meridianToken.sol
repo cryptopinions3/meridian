@@ -5,8 +5,6 @@ pragma solidity 0.4.26;
 
 import "./IERC20.sol";
 import "./SafeMath.sol";
-import "./staking.sol";
-import "./upgrade.sol";
 import "./Ownable.sol";
 import "./ApproveAndCallFallback.sol";
 
@@ -29,7 +27,6 @@ contract Meridian is ERC20, Ownable {
   bool public burnActive=true; //once turned off burn on transfer is permanently disabled
   uint256 LOCKED_AMOUNT=500000 * (10 ** 18);
   uint256 unlockTime=now + 62 days;
-  address public previousToken= 0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC;
 
   constructor() public Ownable(){
     balances[address(this)] = LOCKED_AMOUNT;
