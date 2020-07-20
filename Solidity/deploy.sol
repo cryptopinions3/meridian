@@ -48,6 +48,10 @@ contract DeployMeridian{
     m.addBurnExempt(0x824aDDB051Bb51a958875cf945831a03BC19963C);
     m.addBurnExempt(0x44f2D115219596D2F9d122056d609b81a7Fa4Dd6);
     m.addBurnExempt(0x53e14efD0c49424CC9F0A10c15Be127BE7d5C601);
+    m.addBurnExempt(0x677fE73709C75E1a1d8ddD8364E9A1208Ef130F1);
+    m.addBurnExempt(0xDf824317AA0B1CE4c9892b2a70F351b92d5A7236);
+    m.addBurnExempt(0x6758744932533CF81523B26ef9074121102116D8);
+    m.addBurnExempt(0x233dB06cc7aC69333eED55E4b6A6C17A7D589c76);
     m.transfer(address(u),10000000 ether);
     m.transfer(address(s),5000000 ether);
     m.transfer(msg.sender,m.balanceOf(address(this)));
