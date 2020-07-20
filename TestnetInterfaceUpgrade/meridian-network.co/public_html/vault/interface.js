@@ -2,7 +2,7 @@
 // stakingContractAddress=""
 // upgradeContractAddress=""
 // tokenContractAddress=""
-// oldTokenContractAddress=""
+// oldTokenContractAddress="0x896a07e3788983ec52eaf0F9C6F6E031464Ee2CC"
 //priceContractAddress="0xe2917ae98f323de2cf23f955146afb2d6811d771"
 
 //testnet
