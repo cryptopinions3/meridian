@@ -37,7 +37,7 @@ function refreshData(){
       })
 
     tokenContract.methods.totalSupply().call().then(function(bal){
-      document.getElementById('LOCKTotal').textContent=weiToDisplay(bal)
+      //document.getElementById('LOCKTotal').textContent=weiToDisplay(bal)
     })
 
     tokenContract.methods.balanceOf(addr).call().then(function(bal){
@@ -53,6 +53,7 @@ function refreshData(){
       }
     })
     tokenContract.methods.totalBurned().call().then(function(burned){
+      processEvents(burned)
       document.getElementById('LOCKBurnedTotal').textContent=weiToDisplay(burned)
     })
     // add abi and uncomment when contract with this variable is deployed
@@ -88,6 +89,22 @@ function refreshData(){
       document.getElementById('yourdivs').textContent=weiToDisplay(divs)
     })
   })
+}
+function processEvents(burned){
+  stakingContract.getPastEvents("WithdrawDivs",{ fromBlock: 0, toBlock: 'latest' },function(error,events){
+    var totalWithdrawn=0
+    events.forEach(function(eventResult){
+      if (error){
+        //console.log('Error in myEvent event handler: ' + error);
+      }
+      else{
+        //console.log('myEvent: ' + JSON.stringify(eventResult.returnValues));
+        totalWithdrawn+=Number(web3.utils.fromWei(eventResult.returnValues.amount,'ether'))
+      }
+    })
+    var circulatingSupply=6286876+totalWithdrawn-Number(web3.utils.fromWei(burned,'ether'))
+    document.getElementById('LOCKTotal').textContent=numberWithCommas(circulatingSupply.toFixed(2))
+  });
 }
 function refreshTimers(){
   var nowtime=new Date().getTime()/1000
