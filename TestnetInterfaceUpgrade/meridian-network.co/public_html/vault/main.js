@@ -102,7 +102,7 @@ function processEvents(burned){
         totalWithdrawn+=Number(web3.utils.fromWei(eventResult.returnValues.amount,'ether'))
       }
     })
-    var circulatingSupply=6474500+totalWithdrawn-Number(web3.utils.fromWei(burned,'ether'))
+    var circulatingSupply=6674500+totalWithdrawn-Number(web3.utils.fromWei(burned,'ether'))
     document.getElementById('LOCKTotal').textContent=numberWithCommas(circulatingSupply.toFixed(2))
   });
 }
