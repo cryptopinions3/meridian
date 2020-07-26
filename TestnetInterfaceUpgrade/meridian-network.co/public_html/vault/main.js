@@ -30,11 +30,11 @@ function refreshData(){
     let addr=accounts[0]
     oldEthAddress=addr
 
-      priceContract.methods.getPricePair(web3.utils.toWei("1",'ether'),"0x95172ccBe8344fecD73D0a30F54123652981BD6F","0x95172ccBe8344fecD73D0a30F54123652981BD6F","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2").call().then(function(eth){
-        priceContract.methods.getPricePair(eth,"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2","0x6b175474e89094c44da98b954eedeac495271d0f","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2").call().then(function(dollars){
-          document.getElementById('priceDisplay').textContent=weiToDisplay(dollars)
-        })
-      })
+      // priceContract.methods.getPricePair(web3.utils.toWei("1",'ether'),"0x95172ccBe8344fecD73D0a30F54123652981BD6F","0x95172ccBe8344fecD73D0a30F54123652981BD6F","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2").call().then(function(eth){
+      //   priceContract.methods.getPricePair(eth,"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2","0x6b175474e89094c44da98b954eedeac495271d0f","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2").call().then(function(dollars){
+      //     document.getElementById('priceDisplay').textContent=weiToDisplay(dollars)
+      //   })
+      // })
 
     tokenContract.methods.totalSupply().call().then(function(bal){
       //document.getElementById('LOCKTotal').textContent=weiToDisplay(bal)
@@ -85,8 +85,12 @@ function refreshData(){
       })
 
     })
+    //getDividends
     stakingContract.methods.getTotalDivsSubWithdrawFee(addr).call().then(function(divs){//getDividends
-      document.getElementById('yourdivs').textContent=weiToDisplay(divs)
+      //subwithdrawfee mistakenly includes the 5% unstaking fee, reverse this
+       var startdivs=web3.utils.fromWei(divs,'ether')
+       var enddivs=numberWithCommas((parseFloat(startdivs)/0.95).toFixed(2))
+       document.getElementById('yourdivs').textContent=enddivs
     })
   })
 }
